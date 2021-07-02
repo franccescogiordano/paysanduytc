@@ -9,12 +9,15 @@ GUI\main$3.class
 GUI\cargarrenovacion$1.class
 GUI\addfuncionario$3.class
 GUI\administrarfuncionarios$6.class
+GUI\funcionariosvencidos$6.class
 GUI\administrarfuncionarios$9.class
+GUI\renovarcarnet.class
 GUI\funcionariosvencidos.class
 GUI\main$6.class
 GUI\addfuncionario$1.class
 GUI\administrarfuncionarios$2.class
 GUI\addfuncionario.class
+GUI\renovarcarnet$1.class
 CONTROLADORES\controladorfuncionario.class
 GUI\funcionariosvencidos$4.class
 GUI\cargarrenovacion.class
@@ -24,6 +27,7 @@ GUI\addfuncionario$4.class
 GUI\administrarfuncionarios$8.class
 GUI\funcionariosvencidos$5.class
 GUI\asignarhorarios$4.class
+GUI\renovarcarnet$2.class
 GUI\main$2.class
 GUI\addfuncionario$2.class
 GUI\asignarhorarios.class

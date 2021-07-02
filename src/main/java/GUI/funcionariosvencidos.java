@@ -7,6 +7,7 @@ package GUI;
 
 import CLASES.carnets;
 import CLASES.funcionario;
+import static GUI.administrarfuncionarios.funcio;
 import static GUI.administrarfuncionarios.mdl1;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,8 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
     /**
      * Creates new form funcionariosvencidos
      */
+    public static carnets carnet;
+    
     public static boolean activo = false;
     public funcionariosvencidos() {
         initComponents();
@@ -41,6 +44,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
         mdl1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         mdl2 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -60,7 +64,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("10 dias o menos para vencimiento");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -126,37 +130,50 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
             mdl2.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        jButton1.setText("Renovar Carnet Selecionado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,20 +181,9 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
 
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
 //        vaciarcampos();
-//        funcio = (funcionario) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
+carnet = (carnets) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
 //
-//        if (evt.getClickCount() == 2) {
-//            int i;
-//            JOptionPane.showMessageDialog(null,
-//                "Nombre: " + funcio.getNombre() + "\n"
-//                + "Apellido: " + funcio.getApellido()+ "\n"
-//                + "Celular: " + funcio.getCelular()+ "\n"
-//                + "Cedula: " + funcio.getCedula()+ "\n"
-//
-//                + carnetsfuncio(funcio)
-//
-//            );
-//        }
+
 //
 //        // TODO add your handling code here:
 //
@@ -197,6 +203,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mdl1MouseClicked
 
     private void mdl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl2MouseClicked
+carnet = (carnets) mdl2.getValueAt(mdl2.getSelectedRow(), 0);
         // TODO add your handling code here:
     }//GEN-LAST:event_mdl2MouseClicked
 
@@ -205,8 +212,20 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+   renovarcarnet.carnefuncionario= carnet;
+        if (renovarcarnet.activo == false) {
+            renovarcarnet AU = new renovarcarnet();           
+            main.jDesktopPane1.add(AU);
+            AU.setVisible(true);
+            
+        }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 public static void cargartablavencidos() {
-        DefaultTableModel md1 = (DefaultTableModel) mdl1.getModel();
+        DefaultTableModel md1 = (DefaultTableModel) mdl2.getModel();
         md1.setRowCount(0);
         Iterator<carnets> it = main.funcionariosconcarnetvencido.iterator();
         while (it.hasNext()) {
@@ -226,7 +245,7 @@ public static void cargartablavencidos() {
         }
     }
 public static void cargartablaporvencer() {
-        DefaultTableModel md2 = (DefaultTableModel) mdl2.getModel();
+        DefaultTableModel md2 = (DefaultTableModel) mdl1.getModel();
         md2.setRowCount(0);
         Iterator<carnets> it = main.funcionariosconcarnetporvencer.iterator();
         while (it.hasNext()) {
@@ -246,6 +265,7 @@ public static void cargartablaporvencer() {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

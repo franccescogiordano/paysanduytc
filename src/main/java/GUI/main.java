@@ -33,8 +33,7 @@ public class main extends javax.swing.JFrame {
      public static List<funcionario> funcionarios;
      public static List<carnets> funcionariosconcarnetporvencer=new ArrayList<carnets>();
      public static List<carnets> funcionariosconcarnetvencido= new ArrayList<carnets>();
-     controladorfuncionario  ctrlfuncionario= new controladorfuncionario();
-     ctrl_controladoravisos ctrlavisos= new ctrl_controladoravisos();
+    controladorfuncionario  ctrlfuncionario= new controladorfuncionario();     ctrl_controladoravisos ctrlavisos= new ctrl_controladoravisos();
     public main() {
         initComponents();
         Toolkit t = Toolkit.getDefaultToolkit();
@@ -49,6 +48,7 @@ public class main extends javax.swing.JFrame {
             AU.setVisible(true);
         }
         ctrlavisos.avisarcarnevencido(funcionarios);
+        
         
     }
 
