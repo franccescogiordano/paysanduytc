@@ -28,28 +28,35 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
-     public static List<cargo> cargos;
-     public static List<horarios> Horarios;
-     public static List<funcionario> funcionarios;
-     public static List<carnets> funcionariosconcarnetporvencer=new ArrayList<carnets>();
-     public static List<carnets> funcionariosconcarnetvencido= new ArrayList<carnets>();
-    controladorfuncionario  ctrlfuncionario= new controladorfuncionario();     ctrl_controladoravisos ctrlavisos= new ctrl_controladoravisos();
+    public static funcionariosvencidos AUd;
+    public static List<cargo> cargos;
+    public static List<horarios> Horarios;
+    public static List<funcionario> funcionarios;
+    public static List<carnets> funcionariosconcarnetporvencer = new ArrayList<carnets>();
+    public static List<carnets> funcionariosconcarnetvencido = new ArrayList<carnets>();
+    controladorfuncionario ctrlfuncionario = new controladorfuncionario();
+    ctrl_controladoravisos ctrlavisos = new ctrl_controladoravisos();
+
     public main() {
         initComponents();
         Toolkit t = Toolkit.getDefaultToolkit();
         Dimension screenSize = t.getScreenSize();
         this.setMinimumSize(screenSize);
-        cargos=ctrlfuncionario.cargarcargos();
-        funcionarios=ctrlfuncionario.cargarfuncionarios();
-        Horarios=ctrlfuncionario.CargarHorarios();
-             if (funcionariosvencidos.activo == false) {
-            funcionariosvencidos AU = new funcionariosvencidos();
-            jDesktopPane1.add(AU);
-            AU.setVisible(true);
+        cargos = ctrlfuncionario.cargarcargos();
+        funcionarios = ctrlfuncionario.cargarfuncionarios();
+        Horarios = ctrlfuncionario.CargarHorarios();
+
+        if (funcionariosvencidos.activo == false) {
+            main.AUd = new funcionariosvencidos();  
+            jDesktopPane1.add(main.AUd);
+            Dimension desktopSize = screenSize;
+            Dimension FrameSize = main.AUd.getSize();
+            main.AUd.setLocation((desktopSize.width - FrameSize.width), (desktopSize.height - FrameSize.height));
+          
+            main.AUd.setVisible(true);
         }
         ctrlavisos.avisarcarnevencido(funcionarios);
-        
-        
+
     }
 
     /**
@@ -92,14 +99,17 @@ public class main extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Usuarios");
+        jMenu1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Funcionarios");
+        jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem1.setText("Administrar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +118,7 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem2.setText("Cargar Nuevo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +127,7 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
+        jMenuItem6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem6.setText("Asignar Horarios");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +139,9 @@ public class main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Cargos");
+        jMenu3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem3.setText("Nuevo Cargo");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +153,9 @@ public class main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Carnets");
+        jMenu4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jMenuItem4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem4.setText("Cargar Renovacion");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,13 +164,16 @@ public class main extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem4);
 
+        jMenuItem5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem5.setText("Ver todos");
         jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Horarios");
+        jMenu5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jMenuItem7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem7.setText("Cargar Nuevo Horario");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +201,7 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-          if (addfuncionario.activo == false) {
+        if (addfuncionario.activo == false) {
             addfuncionario AU = new addfuncionario();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
@@ -191,7 +210,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-           if (addcargo.activo == false) {
+        if (addcargo.activo == false) {
             addcargo AU = new addcargo();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
@@ -200,12 +219,12 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-   this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-          if (administrarfuncionarios.activo == false) {
+        if (administrarfuncionarios.activo == false) {
             administrarfuncionarios AU = new administrarfuncionarios();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
@@ -222,16 +241,16 @@ public class main extends javax.swing.JFrame {
             asignarhorarios AU = new asignarhorarios();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
-        }        
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-         if (cargarhorarios.activo == false) {
+        if (cargarhorarios.activo == false) {
             cargarhorarios AU = new cargarhorarios();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
-        } 
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
@@ -239,21 +258,20 @@ public class main extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-     
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-             /*   if ("Nimbus".equals(info.getName())) {
+                /*   if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                 
                 
-                   */ 
-             UIManager.setLookAndFeel( new FlatDarkLaf());
-             break;
-                }
+                 */
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+                break;
             }
-         catch (Exception ex) {
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-}
+        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -263,8 +281,8 @@ public class main extends javax.swing.JFrame {
             }
         });
     }
-        
-        
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;

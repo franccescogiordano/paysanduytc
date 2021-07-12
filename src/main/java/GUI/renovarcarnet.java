@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,15 +26,15 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
     /**
      * Creates new form renovarcarnet
      */
-    public static boolean activo=false;
+    public static boolean activo = false;
     ctrl_controladoravisos ctrlavisos = new ctrl_controladoravisos();
     controladorfuncionario ctrlfuncionario = new controladorfuncionario();
-    public static carnets carnefuncionario=new carnets();
+    public static carnets carnefuncionario = new carnets();
 
     public renovarcarnet() {
-        
+
         initComponents();
-        activo=true;
+        activo = true;
         jLabelPropietario.setText(carnefuncionario.getFuncionariodueniodelcarne().getNombre());
         jLabelFechaVencimiento.setText(String.valueOf(carnefuncionario.getFechavencimiento()));
         jLabelTipoCarne.setText(carnefuncionario.getTipocarnet());
@@ -58,7 +59,6 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
         jLabelTipoCarne = new javax.swing.JLabel();
         jLabelPropietario = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
-        JdateChosserfecha = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -79,6 +79,7 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Renovar Carnet");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,19 +87,33 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Fecha Actual de Vencimiento");
 
+        jLabelFechaVencimiento.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelFechaVencimiento.setText("jLabel2");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Tipo de Carne");
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Propietario");
 
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
+        jLabelTipoCarne.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelTipoCarne.setText("jLabel5");
 
+        jLabelPropietario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelPropietario.setText("jLabel6");
+
+        jDateChooser.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,27 +122,25 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(67, 67, 67))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(JdateChosserfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(43, 43, 43)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel4))
-                            .addGap(52, 52, 52)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabelFechaVencimiento)
-                                .addComponent(jLabelTipoCarne)
-                                .addComponent(jLabelPropietario)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelFechaVencimiento)
+                            .addComponent(jLabelTipoCarne)
+                            .addComponent(jLabelPropietario))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,11 +158,9 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabelPropietario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(JdateChosserfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -160,36 +171,38 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Date date= new Date();
+        Date date = new Date();
         carnefuncionario.setFechaRenovacion(date);
         carnefuncionario.setFechavencimiento(jDateChooser.getDate());
         CPrincipal.getInstance().merge(carnefuncionario);
-        main.funcionarios=ctrlfuncionario.cargarfuncionarios();
+        main.funcionarios = ctrlfuncionario.cargarfuncionarios();
 
-            ctrlavisos.avisarcarnevencido(main.funcionarios);
+        ctrlavisos.avisarcarnevencido(main.funcionarios);
 
-           
-   
-
- //       funcionariosvencidos.invalidate();
-    //    funcionariosvencidos.validate();
-         if (funcionariosvencidos.activo == true) {
-          funcionariosvencidos.cargartablaporvencer();
-          funcionariosvencidos.cargartablavencidos();
+        //       funcionariosvencidos.invalidate();
+        //    funcionariosvencidos.validate();
+        if (funcionariosvencidos.activo == true) {
+            funcionariosvencidos.cargartablaporvencer();
+            funcionariosvencidos.cargartablavencidos();
         }
-
+        JOptionPane.showMessageDialog(null, "Carnet Renovado con Exito!", null, JOptionPane.INFORMATION_MESSAGE);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        activo = false;
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static com.toedter.calendar.JDateChooser JdateChosserfecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     public static com.toedter.calendar.JDateChooser jDateChooser;

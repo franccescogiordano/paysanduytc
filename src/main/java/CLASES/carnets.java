@@ -92,7 +92,7 @@ public class carnets implements Serializable {
 
     @Override
     public String toString() {
-        return "CLASES.carnets[ id=" + id + " ]";
+        return this.getFuncionariodueniodelcarne().getNombre();
     }
     
 }

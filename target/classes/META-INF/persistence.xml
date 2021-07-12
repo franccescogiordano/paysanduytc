@@ -12,6 +12,7 @@
     <class>CLASES.obtienelogro</class>
     <class>CLASES.usuario</class>
     <class>CLASES.obtienecargo</class>
+    <class>CLASES.observacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/paysaytc"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

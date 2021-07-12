@@ -107,12 +107,18 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("F.N");
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Celular");
 
+        jComboBoxCargo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Cargo");
 
+        jCheckBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jCheckBox1.setText("Brebet");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -125,6 +131,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jCheckBox2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jCheckBox2.setText("Carnet Salud");
         jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -138,6 +145,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
 
         jDateChooserFecha.setDateFormatString("dd-MM-yyyy");
 
+        jButtonModificar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +153,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,10 +161,21 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jTextFieldApeliido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jTextFieldCedula.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jTextFieldCelular.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Nombre");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Apellido");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Cedula");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -245,16 +265,16 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();

@@ -22,6 +22,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class funcionario implements Serializable {
 
+    @OneToMany(mappedBy = "funcionariobservado")
+    private List<observacion> observaciones;
+
     @OneToMany(mappedBy = "funcionariopremiado")
     private List<obtienelogro> obtienelogros;
 
@@ -51,6 +54,14 @@ public class funcionario implements Serializable {
     private String apellido;
     private int cedula;
     private obtienelogro logrofuncionario;
+
+    public List<observacion> getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(List<observacion> observaciones) {
+        this.observaciones = observaciones;
+    }
 
     public int getCedula() {
         return cedula;
@@ -177,7 +188,7 @@ public class funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "CLASES.funcionario[ id=" + id + " ]";
+        return this.getNombre();
     }
     
 }
