@@ -37,6 +37,26 @@ public class controladorfuncionario {
         return lista;
     
 }
+ public static funcionario findfuncionario(String nombreapellido){
+     String nombre;
+     String apellido;
+     String[] datos = nombreapellido.split(" ");
+     nombre=datos[0];
+     apellido=datos[1];
+     Iterator<funcionario> it= main.funcionarios.iterator();
+     while (it.hasNext()) {
+         funcionario next =  it.next();
+         if(next.getApellido().equals(apellido) && next.getNombre().equals(nombre)){
+             return next;
+         }else{
+              
+         }
+         
+     }
+     return null;
+ }
+
+
   public List<funcionario> cargarfuncionarios(){
      
         List<funcionario> lista = null;

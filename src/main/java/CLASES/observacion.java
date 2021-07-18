@@ -90,7 +90,7 @@ public class observacion implements Serializable {
 
     @Override
     public String toString() {
-        return "CLASES.observacion[ id=" + id + " ]";
+        return this.descripcion;
     }
     
 }

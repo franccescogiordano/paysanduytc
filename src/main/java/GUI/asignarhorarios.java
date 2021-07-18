@@ -9,9 +9,10 @@ import CLASES.funcionario;
 import CLASES.horarios;
 import static GUI.administrarfuncionarios.mdl1;
 import PERSISTENCIA.CPrincipal;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -22,19 +23,17 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form asignarhorarios
      */
-      public static boolean activo = false;
-       public static funcionario funcionariohorario=null;
-       public static  horarios horario= new horarios();
+    public static boolean activo = false;
+    public static funcionario funcionariohorario = null;
+    public static horarios horario = new horarios();
+
     public asignarhorarios() {
         initComponents();
-        activo=true;
+        activo = true;
         cargartabla();
         cargartablaHORARIOSFUNCIONARIO();
-        //jLabel3.setText(funcionariohorario.getNombre());
-        
-      
-       
-       
+        jLabel3Funcionario.setText(funcionariohorario.getNombre());
+
     }
 
     /**
@@ -129,7 +128,20 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
             new String [] {
                 "Dia", "Hora Inicio", "Hora Fin"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablehorariosfuncio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablehorariosfuncioMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTablehorariosfuncio);
 
         jLabel3Funcionario.setText("jLabel3");
@@ -150,13 +162,13 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(139, 139, 139))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                        .addGap(141, 141, 141))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(88, 88, 88)
@@ -173,11 +185,11 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3Funcionario))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(33, 33, 33))
+                .addContainerGap(69, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
@@ -193,40 +205,41 @@ public void cargartabla() {
         Iterator<horarios> it = main.Horarios.iterator();
         while (it.hasNext()) {
             horarios next = it.next();
-      //      if (next.isEliminado() != true) {
-                //Object[] fila = new Object[5];
-                Object[] fila = new Object[3];
-                fila[0] = next;
-                fila[1] = next.getHoracomienzo();
-                fila[2] = next.getHorafin();
-                md1.addRow(fila);
-                //fila[3] = next.getTelefonos();
-                //fila[4] = next.getRepartidores();
-                
-          //  }
+            //      if (next.isEliminado() != true) {
+            //Object[] fila = new Object[5];
+            Object[] fila = new Object[3];
+            fila[0] = next;
+            fila[1] = next.getHoracomienzo();
+            fila[2] = next.getHorafin();
+            md1.addRow(fila);
+            //fila[3] = next.getTelefonos();
+            //fila[4] = next.getRepartidores();
+
+            //  }
         }
     }
-public void cargartablaHORARIOSFUNCIONARIO() {
+
+    public void cargartablaHORARIOSFUNCIONARIO() {
         DefaultTableModel md1 = (DefaultTableModel) asignarhorarios.jTablehorariosfuncio.getModel();
         md1.setRowCount(0);
         Iterator<horarios> it = funcionariohorario.getHorariosdelfuncionario().iterator();
         while (it.hasNext()) {
             horarios next = it.next();
-      //      if (next.isEliminado() != true) {
-                //Object[] fila = new Object[5];
-                Object[] fila = new Object[3];
-                fila[0] = next;
-                fila[1] = next.getHoracomienzo();
-                fila[2] = next.getHorafin();
-                md1.addRow(fila);
-                //fila[3] = next.getTelefonos();
-                //fila[4] = next.getRepartidores();
-                
-          //  }
+            //      if (next.isEliminado() != true) {
+            //Object[] fila = new Object[5];
+            Object[] fila = new Object[3];
+            fila[0] = next;
+            fila[1] = next.getHoracomienzo();
+            fila[2] = next.getHorafin();
+            md1.addRow(fila);
+            //fila[3] = next.getTelefonos();
+            //fila[4] = next.getRepartidores();
+
+            //  }
         }
     }
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
 
@@ -235,25 +248,33 @@ public void cargartablaHORARIOSFUNCIONARIO() {
     }//GEN-LAST:event_md1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    horario = (horarios) md1.getValueAt(md1.getSelectedRow(), 0);
-    funcionariohorario.getHorariosdelfuncionario().add(horario);
-    CPrincipal.getInstance().merge(funcionariohorario);
-    cargartablaHORARIOSFUNCIONARIO();
+        horario = (horarios) md1.getValueAt(md1.getSelectedRow(), 0);
+        List<horarios> horas = new ArrayList<horarios>();
+        horas = funcionariohorario.getHorariosdelfuncionario();
+        horas.add(horario);
+        funcionariohorario.setHorariosdelfuncionario(horas);
+        CPrincipal.getInstance().merge(funcionariohorario);
+        CPrincipal.getInstance().refresh(funcionariohorario);
+        cargartablaHORARIOSFUNCIONARIO();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       horario = (horarios) jTablehorariosfuncio.getValueAt(jTablehorariosfuncio.getSelectedRow(), 0);   
+        horario = (horarios) jTablehorariosfuncio.getValueAt(jTablehorariosfuncio.getSelectedRow(), 0);
         Iterator<horarios> it = funcionariohorario.getHorariosdelfuncionario().iterator();
         while (it.hasNext()) {
             horarios next = it.next();
             if (next.getId() == horario.getId()) {
                 CPrincipal.getInstance().delete(next);
-           }
+            }
         }
-       
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTablehorariosfuncioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablehorariosfuncioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTablehorariosfuncioMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -29,6 +29,15 @@ public class horarios implements Serializable {
     private String dia; 
     private String horacomienzo;
     private String horafin; 
+    private String ocupacion;
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
     @ManyToMany
     private List<funcionario>funcionariosasignados;
 

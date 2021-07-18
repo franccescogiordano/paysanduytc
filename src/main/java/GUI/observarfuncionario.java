@@ -9,6 +9,7 @@ import CLASES.funcionario;
 import CLASES.observacion;
 import CONTROLADORES.controladorfuncionario;
 import PERSISTENCIA.CPrincipal;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +24,7 @@ public class observarfuncionario extends javax.swing.JInternalFrame {
     public static controladorfuncionario ctrlfuncio = new controladorfuncionario();
     public static funcionario funcio = null;
     public static boolean activo = false;
-
+    
     public observarfuncionario() {
         initComponents();
         jLabelFuncionario.setText(funcio.getNombre());
@@ -91,7 +92,7 @@ public class observarfuncionario extends javax.swing.JInternalFrame {
 
         jLabelFuncionario.setText("jLabel3");
 
-        jComboBoxGravedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Grave", " " }));
+        jComboBoxGravedad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escrita", "Oral", "Sansion", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,25 +148,26 @@ public class observarfuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-if(!jTextAreaDesc.getText().isBlank()){
-        observacion obs = new observacion();
-        obs.setDescripcion(jTextAreaDesc.getText());
-        obs.setGravedad((String) jComboBoxGravedad.getSelectedItem());
-        obs.setFuncionariobservado(funcio);
-        CPrincipal.getInstance().persist(obs);
-        CPrincipal.getInstance().refresh(funcio); 
-      JOptionPane.showMessageDialog(null, "Observacion Cargada Correctamente", null, JOptionPane.INFORMATION_MESSAGE);
+        if (!jTextAreaDesc.getText().isBlank()) {
+            Date hoy = new Date();
+            observacion obs = new observacion();
+            obs.setDescripcion(jTextAreaDesc.getText());
+            obs.setGravedad((String) jComboBoxGravedad.getSelectedItem());
+            obs.setFuncionariobservado(funcio);
+            obs.setFechaobservacion(hoy);
+            CPrincipal.getInstance().persist(obs);
+            CPrincipal.getInstance().refresh(funcio);            
+            JOptionPane.showMessageDialog(null, "Observacion Cargada Correctamente", null, JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-}else{
-          JOptionPane.showMessageDialog(null, "Error: Verifique datos", null, JOptionPane.ERROR_MESSAGE);
-           
-       
-}
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Verifique datos", null, JOptionPane.ERROR_MESSAGE);
+            
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
 

@@ -7,9 +7,14 @@ package GUI;
 
 import CLASES.funcionario;
 import CLASES.observacion;
+import java.awt.Font;
 
 import java.util.Iterator;
+import javax.persistence.FetchType;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.cfg.AnnotationBinder;
 
 /**
  *
@@ -20,32 +25,36 @@ public class listobs extends javax.swing.JInternalFrame {
     /**
      * Creates new form listobs
      */
-       public static funcionario funcio = null;
+    JLabel label = new JLabel();
+    public static funcionario funcio = null;
     public static boolean activo = false;
+
     public listobs() {
         initComponents();
-        activo=true;
+        activo = true;
         cargartabla();
     }
-public void cargartabla() {
+
+    public void cargartabla() {
         DefaultTableModel md1 = (DefaultTableModel) mdl1.getModel();
         md1.setRowCount(0);
-        Iterator<observacion> it =funcio.getObservaciones().iterator();
+        Iterator<observacion> it = funcio.getObservaciones().iterator();
         while (it.hasNext()) {
             observacion next = it.next();
-      //      if (next.isEliminado() != true) {
-                //Object[] fila = new Object[5];
-                Object[] fila = new Object[3];
-                fila[0] = next;
-                fila[1] = next.getGravedad();
-                fila[2] = next.getFechaobservacion();
-                md1.addRow(fila);
-                //fila[3] = next.getTelefonos();
-                //fila[4] = next.getRepartidores();
-                
-          //  }
+            //      if (next.isEliminado() != true) {
+            //Object[] fila = new Object[5];
+            Object[] fila = new Object[3];
+            fila[0] = next;
+            fila[1] = next.getGravedad();
+            fila[2] = next.getFechaobservacion();
+            md1.addRow(fila);
+            //fila[3] = next.getTelefonos();
+            //fila[4] = next.getRepartidores();
+
+            //  }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,9 +100,22 @@ public void cargartabla() {
                 {null, null, null}
             },
             new String [] {
-                "Dellate", "Grado", "Fecha"
+                "Motivo", "Tipo", "Fecha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        mdl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mdl1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(mdl1);
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -105,14 +127,13 @@ public void cargartabla() {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(55, 55, 55))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,9 +151,22 @@ public void cargartabla() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-  activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
+        observacion prod = (observacion) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
+        if (evt.getClickCount() == 2) {
+            label.setText("<html>Nombre Funcionario Observado: " + prod.getFuncionariobservado().getNombre() + "<br>"
+                    + "Motivo: " + prod.getDescripcion() + "<br>"
+                    + "Tipo: " + prod.getGravedad() + "<br>"
+                    + "Fecha: " + prod.getFechaobservacion() + "<br>");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            JOptionPane.showMessageDialog(null, label, "Producto", JOptionPane.INFORMATION_MESSAGE);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mdl1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
