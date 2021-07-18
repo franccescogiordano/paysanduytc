@@ -94,9 +94,9 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserLibreta = new com.toedter.calendar.JDateChooser();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserIngreso = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -213,12 +213,17 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Cedula");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 110, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 438, 153, -1));
+        jPanel1.add(jDateChooserLibreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 438, 153, -1));
 
         jCheckBox3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jCheckBox3.setText("Libreta de Conducir");
+        jCheckBox3.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox3ItemStateChanged(evt);
+            }
+        });
         jPanel1.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 443, -1, -1));
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 210, -1));
+        jPanel1.add(jDateChooserIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 210, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Fecha Ingreso");
@@ -286,14 +291,14 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         msg.setText("<html>");
         String nombre, apellido, celular;
         String cedula = jTextFieldCedula.getText();
-        Date fn, datebrebet, datecarnet;
+        Date fn, datebrebet, datecarnet,datelibreta,dateingreso;
         cargo pepe;
-        boolean tienecarne = false, tienebrebet = false;
+        boolean tienecarne = false, tienebrebet = false,tienelibreta=false;
         if (cedula.isBlank()) {
-            msg.setText(msg.getText() + "Falta compleatar campo cedula<br>");
+            msg.setText(msg.getText() + "Falta compleatar campo cedula <br>");
             jTextFieldCedula.setBackground(Color.red);
         } else if (cedula.length() != 8 || !validarDNI(cedula)) {
-            msg.setText(msg.getText() + "La cedula es invalida<br>");
+            msg.setText(msg.getText() + "La cedula es invalida <br>");
             jTextFieldCedula.setBackground(Color.red);
         }
         if (jCheckBox1.isSelected()) {
@@ -303,6 +308,9 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         if (jCheckBox2.isSelected()) {
             tienecarne = true;
         }
+        if (jCheckBox3.isSelected()) {
+            tienelibreta = true;
+        }
         nombre = jTextFieldNombre.getText();
         apellido = jTextFieldApeliido.getText();
         celular = jTextFieldCelular.getText();
@@ -310,6 +318,8 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         fn = jDateChooserFecha.getDate();
         datebrebet = jDateChooserBrebet.getDate();
         datecarnet = jDateChooserCarnet.getDate();
+        datelibreta= jDateChooserLibreta.getDate();
+        dateingreso= jDateChooserIngreso.getDate();
         if (nombre.isBlank()) {
 
             msg.setText(msg.getText() + "Falta compleatar campo nombre <br>");
@@ -330,6 +340,13 @@ public class addfuncionario extends javax.swing.JInternalFrame {
 
             }
         }
+        if (tienelibreta) {
+            if (checkvaliddate(datelibreta) == true) {
+                msg.setText(msg.getText() + "Fecha Libreta Vencida <br>");
+            } else {
+
+            }
+        }
         if (tienebrebet) {
             if (checkvaliddate(datebrebet) == true) {
                 msg.setText(msg.getText() + "Fecha Brebet Vencida <br>");
@@ -344,6 +361,8 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             funcionarioo.setApellido(apellido);
             funcionarioo.setCelular(celular);
             funcionarioo.setFechaNacimiento(fn);
+            funcionarioo.setFechaIngreso(dateingreso);
+            
             funcionarioo.setCedula(Integer.parseInt((cedula)));
             obtienecargo cargoobtenido = new obtienecargo();
             cargoobtenido.setCargoobtenido(pepe);
@@ -377,6 +396,16 @@ public class addfuncionario extends javax.swing.JInternalFrame {
                 CPrincipal.getInstance().refresh(funcionarioo);
 
             }
+            if (tienelibreta) {
+
+                carnets carne3 = new carnets();
+                carne3.setFechavencimiento(datelibreta);
+                carne3.setFuncionariodueniodelcarne(funcionarioo);
+                carne3.setTipocarnet("Libreta Conducir");
+                CPrincipal.getInstance().persist(carne3);
+                CPrincipal.getInstance().refresh(funcionarioo);
+
+            }
             main.funcionarios.add(funcionarioo);
             vaciarcampos();
             label.setText("Funcionario registrado correctamente");
@@ -390,6 +419,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
             msg.setText("<html>");
         }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
@@ -463,6 +493,15 @@ public class addfuncionario extends javax.swing.JInternalFrame {
     private void jTextFieldCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCelularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCelularActionPerformed
+
+    private void jCheckBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox3ItemStateChanged
+           if (jCheckBox3.isSelected()) {
+            jDateChooserLibreta.setVisible(true);
+        } else {
+            jDateChooserLibreta.setVisible(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3ItemStateChanged
     public void vaciarcampos() {
         jTextFieldNombre.setText("");
         jTextFieldApeliido.setText("");
@@ -482,11 +521,11 @@ public class addfuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     public static javax.swing.JComboBox<cargo> jComboBoxCargo;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private com.toedter.calendar.JDateChooser jDateChooserBrebet;
     private com.toedter.calendar.JDateChooser jDateChooserCarnet;
     private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private com.toedter.calendar.JDateChooser jDateChooserIngreso;
+    private com.toedter.calendar.JDateChooser jDateChooserLibreta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

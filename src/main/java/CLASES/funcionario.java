@@ -50,11 +50,21 @@ public class funcionario implements Serializable {
     private Long id;
     private String nombre;
     private Date FechaNacimiento;
+    private Date FechaIngreso;
     private String celular;
     private String apellido;
     private int cedula;
     private obtienelogro logrofuncionario;
 
+    public Date getFechaIngreso() {
+        return FechaIngreso;
+    }
+
+    public void setFechaIngreso(Date FechaIngreso) {
+        this.FechaIngreso = FechaIngreso;
+    }
+
+    
     public List<observacion> getObservaciones() {
         return observaciones;
     }

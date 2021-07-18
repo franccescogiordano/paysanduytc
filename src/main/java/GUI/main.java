@@ -12,6 +12,7 @@ import CLASES.horarios;
 import CONTROLADORES.ActualizarDatos;
 import CONTROLADORES.controladorfuncionario;
 import CONTROLADORES.ctrl_controladoravisos;
+import PERSISTENCIA.CPrincipal;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -38,6 +39,7 @@ public class main extends javax.swing.JFrame {
      * Creates new form main
      */
     public static funcionariosvencidos AUd;
+    public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static List<cargo> cargos;
     public static List<horarios> Horarios;
     public static List<funcionario> funcionarios;
@@ -53,7 +55,18 @@ public class main extends javax.swing.JFrame {
         cargos = ctrlfuncionario.cargarcargos();
         funcionarios = ctrlfuncionario.cargarfuncionarios();
         Horarios = ctrlfuncionario.CargarHorarios();
-
+       
+          funcionario funcio=controladorfuncionario.findfuncionario("FRANCCESCO GIORDANO");
+          funcio.getHorariosdelfuncionario().clear();
+          horarios pepe= new horarios();
+          pepe.setDia("lunes");
+          pepe.setHoracomienzo("8");
+          pepe.setHorafin("13");
+          pepe.setOcupacion("rascahuevo");
+          horariosfuncio.add(pepe);
+          funcio.setHorariosdelfuncionario(horariosfuncio);
+          CPrincipal.getInstance().persist(pepe);
+          
         if (funcionariosvencidos.activo == false) {
             main.AUd = new funcionariosvencidos();
             jDesktopPane1.add(main.AUd);
@@ -295,8 +308,8 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        if (cargarhorarios.activo == false) {
-            cargarhorarios AU = new cargarhorarios();
+        if (tabladehorarios.activo == false) {
+            tabladehorarios AU = new tabladehorarios();
             jDesktopPane1.add(AU);
             AU.setVisible(true);
         }

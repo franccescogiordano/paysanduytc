@@ -83,7 +83,7 @@ public class obtienelogro implements Serializable {
 
     @Override
     public String toString() {
-        return "CLASES.obtienelogro[ id=" + id + " ]";
+        return logrologrado.getLogro();
     }
     
 }

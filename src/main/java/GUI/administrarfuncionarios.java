@@ -43,6 +43,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
         jButton6Times = new javax.swing.JButton();
         jButton7Observation = new javax.swing.JButton();
         jButton8ViewFails = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("ADMINISTAR FUNCIONARIOS");
@@ -194,6 +195,9 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setText("Logros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,21 +205,30 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4ModOtherData)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton8ViewFails))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5ChangeOcupation)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6Times, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7Observation)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jButton5ChangeOcupation)
+                                .addGap(72, 72, 72)
+                                .addComponent(jButton6Times, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jButton4ModOtherData)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton8ViewFails)
+                                .addGap(51, 51, 51)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton7Observation))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +238,8 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4ModOtherData)
-                            .addComponent(jButton8ViewFails))
+                            .addComponent(jButton8ViewFails)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5ChangeOcupation)
@@ -448,6 +462,7 @@ public void desactivarcarnets() {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton1RenovarCarnet;
     private javax.swing.JButton jButton2RenovarBrebet;
     private javax.swing.JButton jButton3;

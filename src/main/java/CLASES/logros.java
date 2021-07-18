@@ -23,12 +23,19 @@ public class logros implements Serializable {
     @OneToMany(mappedBy = "logrologrado")
     private List<obtienelogro> obtienelogros;
 
+    public List<obtienelogro> getObtienelogros() {
+        return obtienelogros;
+    }
+
+    public void setObtienelogros(List<obtienelogro> obtienelogros) {
+        this.obtienelogros = obtienelogros;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String Logro;
-
     public String getLogro() {
         return Logro;
     }
