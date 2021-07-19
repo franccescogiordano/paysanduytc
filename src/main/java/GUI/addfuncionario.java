@@ -40,10 +40,11 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         initComponents();
         jDateChooserBrebet.setVisible(false);
         jDateChooserCarnet.setVisible(false);
+        jDateChooserLibreta.setVisible(false);
         CF.CargarCBoxCargos();
         jButtonModificar.setEnabled(false);
         activo = true;
-
+        
         if (funcio2 == null) {
             jButtonAgregar.setEnabled(true);
             jButtonModificar.setEnabled(false);
@@ -133,7 +134,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Cargo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 289, -1, 30));
 
         jCheckBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jCheckBox1.setText("Brebet");
@@ -192,6 +193,11 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jPanel1.add(jTextFieldApeliido, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 61, 257, -1));
 
         jTextFieldCedula.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextFieldCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCedulaKeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextFieldCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 106, 257, -1));
 
         jTextFieldCelular.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -200,7 +206,12 @@ public class addfuncionario extends javax.swing.JInternalFrame {
                 jTextFieldCelularActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 230, -1));
+        jTextFieldCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCelularKeyTyped(evt);
+            }
+        });
+        jPanel1.add(jTextFieldCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 210, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Nombre");
@@ -223,11 +234,11 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 443, -1, -1));
-        jPanel1.add(jDateChooserIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 210, -1));
+        jPanel1.add(jDateChooserIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 260, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Fecha Ingreso");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -236,7 +247,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,9 +302,9 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         msg.setText("<html>");
         String nombre, apellido, celular;
         String cedula = jTextFieldCedula.getText();
-        Date fn, datebrebet, datecarnet,datelibreta,dateingreso;
+        Date fn, datebrebet, datecarnet, datelibreta, dateingreso;
         cargo pepe;
-        boolean tienecarne = false, tienebrebet = false,tienelibreta=false;
+        boolean tienecarne = false, tienebrebet = false, tienelibreta = false;
         if (cedula.isBlank()) {
             msg.setText(msg.getText() + "Falta compleatar campo cedula <br>");
             jTextFieldCedula.setBackground(Color.red);
@@ -318,8 +329,8 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         fn = jDateChooserFecha.getDate();
         datebrebet = jDateChooserBrebet.getDate();
         datecarnet = jDateChooserCarnet.getDate();
-        datelibreta= jDateChooserLibreta.getDate();
-        dateingreso= jDateChooserIngreso.getDate();
+        datelibreta = jDateChooserLibreta.getDate();
+        dateingreso = jDateChooserIngreso.getDate();
         if (nombre.isBlank()) {
 
             msg.setText(msg.getText() + "Falta compleatar campo nombre <br>");
@@ -362,7 +373,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             funcionarioo.setCelular(celular);
             funcionarioo.setFechaNacimiento(fn);
             funcionarioo.setFechaIngreso(dateingreso);
-            
+
             funcionarioo.setCedula(Integer.parseInt((cedula)));
             obtienecargo cargoobtenido = new obtienecargo();
             cargoobtenido.setCargoobtenido(pepe);
@@ -419,7 +430,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, msg, "Error", JOptionPane.ERROR_MESSAGE);
             msg.setText("<html>");
         }
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
@@ -495,13 +506,29 @@ public class addfuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldCelularActionPerformed
 
     private void jCheckBox3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox3ItemStateChanged
-           if (jCheckBox3.isSelected()) {
+        if (jCheckBox3.isSelected()) {
             jDateChooserLibreta.setVisible(true);
         } else {
             jDateChooserLibreta.setVisible(false);
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3ItemStateChanged
+
+    private void jTextFieldCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCedulaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCedulaKeyTyped
+
+    private void jTextFieldCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCelularKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCelularKeyTyped
     public void vaciarcampos() {
         jTextFieldNombre.setText("");
         jTextFieldApeliido.setText("");

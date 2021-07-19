@@ -8,9 +8,14 @@ package GUI;
 import CLASES.funcionario;
 import CLASES.horarios;
 import CONTROLADORES.controladorfuncionario;
+import CONTROLADORES.excel;
 import PERSISTENCIA.CPrincipal;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -22,6 +27,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
      * Creates new form tabladehorarios
      */
     funcionario funcio;
+      excel ex = new excel();
     public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static boolean activo = false;
     public tabladehorarios() {
@@ -40,6 +46,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDatos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         TablaDatos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
@@ -62,13 +69,22 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setText("Cargar tabla con excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1469, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(559, 559, 559)
+                .addGap(173, 173, 173)
+                .addComponent(jButton2)
+                .addGap(228, 228, 228)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -78,7 +94,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -168,10 +186,29 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+          JFileChooser selecArchivo = new JFileChooser();
+        File archivo;
+        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (.xls)", "xls"));
+        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (.xlsx)", "xlsx"));
+        if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
+            archivo = selecArchivo.getSelectedFile();
+            if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
+          
+                ex.procesarexcel2(archivo);
+                JOptionPane.showMessageDialog(null, "Datos cargados con exito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Elija un formato valido.");
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaDatos;
+    public static javax.swing.JTable TablaDatos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

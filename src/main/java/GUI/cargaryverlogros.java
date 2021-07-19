@@ -9,6 +9,7 @@ import CLASES.funcionario;
 import CLASES.logros;
 import CLASES.obtienelogro;
 import PERSISTENCIA.CPrincipal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,9 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
     /**
      * Creates new form cargaryverlogros
      */
+    public static boolean activo = false;
     public static funcionario funcio3;
+
     public cargaryverlogros() {
         initComponents();
         cargartabla();
@@ -46,6 +49,9 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        setClosable(true);
+        setTitle("LOGROS FUNCIONARIO");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargar nuevo logro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
@@ -136,21 +142,22 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-if(!jTextArea1.getText().isEmpty()){
-        logros logrologrado=new logros();
-        logrologrado.setLogro(jTextArea1.getText());
-        obtienelogro nuevocargo= new obtienelogro();
-        nuevocargo.setFechaObtencionLogro(jDateChooser2.getDate());
-        nuevocargo.setLogrologrado(logrologrado);
-        nuevocargo.setFuncionariopremiado(funcio3);
-        
-        CPrincipal.getInstance().persist(nuevocargo);
-        
-        CPrincipal.getInstance().refresh(funcio3);
-}
+        if (!jTextArea1.getText().isEmpty()) {
+            logros logrologrado = new logros();
+            logrologrado.setLogro(jTextArea1.getText());
+            obtienelogro nuevocargo = new obtienelogro();
+            nuevocargo.setFechaObtencionLogro(jDateChooser2.getDate());
+            nuevocargo.setLogrologrado(logrologrado);
+            nuevocargo.setFuncionariopremiado(funcio3);
+
+            CPrincipal.getInstance().persist(logrologrado);
+            CPrincipal.getInstance().persist(nuevocargo);
+
+            CPrincipal.getInstance().refresh(funcio3);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
- public void cargartabla() {
+    public void cargartabla() {
         DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
         md1.setRowCount(0);
         Iterator<obtienelogro> it = funcio3.getObtienelogros().iterator();
@@ -160,12 +167,15 @@ if(!jTextArea1.getText().isEmpty()){
             //Object[] fila = new Object[5];
             Object[] fila = new Object[2];
             fila[0] = next;
-            fila[1] = next.getFechaObtencionLogro();
-             md1.addRow(fila);
-         
+            fila[1] = cambiarformatofecha(next.getFechaObtencionLogro());
+            md1.addRow(fila);
+
         }
     }
-
+public String cambiarformatofecha(Date date){
+      SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
+      return  ParaSaberLaHoraInicio.format(date);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
