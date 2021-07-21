@@ -23,6 +23,7 @@ public class listarhorarios extends javax.swing.JInternalFrame {
         int contadorglobal =0; 
         public static boolean activo = false;
     public listarhorarios() {
+        activo=true;
         initComponents();
         cargartabla();
     }
@@ -40,6 +41,23 @@ public class listarhorarios extends javax.swing.JInternalFrame {
         mdl1 = new javax.swing.JTable();
 
         setClosable(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         mdl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +91,11 @@ public class listarhorarios extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        activo=false;
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formInternalFrameClosing
 public void cargartabla() {
     
         DefaultTableModel md1 = (DefaultTableModel) mdl1.getModel();
