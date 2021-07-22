@@ -26,7 +26,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
     public static boolean activo = false;
     public static funcionario funcionariohorario = null;
     public static horarios horario = new horarios();
-
+    public static List<horarios> horas = new ArrayList<horarios>();
     public asignarhorarios() {
         initComponents();
         activo = true;
@@ -74,6 +74,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Asignar Horario al Funcionario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +82,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Quitar Horario del Funcionario");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,10 +90,13 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("HORARIOS");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("HORARIOS DEL FUNCIONARIO");
 
+        md1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         md1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -118,6 +123,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(md1);
 
+        jTablehorariosfuncio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTablehorariosfuncio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -144,6 +150,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(jTablehorariosfuncio);
 
+        jLabel3Funcionario.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3Funcionario.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,7 +160,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3Funcionario)
@@ -173,7 +180,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(88, 88, 88)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(446, Short.MAX_VALUE)))
+                    .addContainerGap(486, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,14 +194,14 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(56, 56, 56)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(180, Short.MAX_VALUE)))
+                    .addContainerGap(126, Short.MAX_VALUE)))
         );
 
         pack();
@@ -244,13 +251,16 @@ public void cargartabla() {
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void md1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_md1MouseClicked
-        // TODO add your handling code here:
+        /*REPARTIDORES*/
+        horas.clear();
+        for (int i = 0; i < funcionariohorario.getHorariosdelfuncionario().size(); i++) {
+            horas.add( funcionariohorario.getHorariosdelfuncionario().get(i));
+        }
+            // TODO add your handling code here:
     }//GEN-LAST:event_md1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         horario = (horarios) md1.getValueAt(md1.getSelectedRow(), 0);
-        List<horarios> horas = new ArrayList<horarios>();
-        horas = funcionariohorario.getHorariosdelfuncionario();
         horas.add(horario);
         funcionariohorario.setHorariosdelfuncionario(horas);
         CPrincipal.getInstance().merge(funcionariohorario);
@@ -261,6 +271,7 @@ public void cargartabla() {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         horario = (horarios) jTablehorariosfuncio.getValueAt(jTablehorariosfuncio.getSelectedRow(), 0);
+        
         Iterator<horarios> it = funcionariohorario.getHorariosdelfuncionario().iterator();
         while (it.hasNext()) {
             horarios next = it.next();

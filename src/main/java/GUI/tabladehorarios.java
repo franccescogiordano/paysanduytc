@@ -77,11 +77,12 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "NOMBRE", "LUNES", "OCUPACION", "MARTES", "OCUPACION", "MIERCOLES", "OCUPACION", "JUEVES", "OCUPACION", "VIERNES", "OCUPACION", "SABADO", "OCUPACION", "DOMINGO", "OCUPACION"
+                "NOMBRE", "LUNES", "OCUP", "MARTES", "OCUP", "MIERCOLES", "OCUP", "JUEVES", "OCUP", "VIERNES", "OCUP", "SABADO", "OCUP", "DOMINGO", "OCUP"
             }
         ));
         jScrollPane1.setViewportView(TablaDatos);
 
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton1.setText("Guardar Datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +90,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton2.setText("Cargar tabla con excel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +139,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horariolunes.setHoracomienzo(datos[0]);
             horariolunes.setHorafin(datos[1]);
             horariosfuncio.add(horariolunes);
+            main.Horarios.add(horariolunes);
              CPrincipal.getInstance().persist(horariolunes);
             }
             datosuwu = (String) TablaDatos.getValueAt(i, 3);
@@ -148,6 +151,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horariomartes.setHoracomienzo(datos[0]);
             horariomartes.setHorafin(datos[1]);
             horariosfuncio.add(horariomartes);
+            main.Horarios.add(horariomartes);
             CPrincipal.getInstance().persist(horariomartes);
             }
             datosuwu = (String) TablaDatos.getValueAt(i, 5);
@@ -160,6 +164,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horariomiercoles.setHoracomienzo(datos[0]);
             horariomiercoles.setHorafin(datos[1]);
             horariosfuncio.add(horariomiercoles); 
+            main.Horarios.add(horariomiercoles);
             CPrincipal.getInstance().persist(horariomiercoles);
             }
             datosuwu = (String) TablaDatos.getValueAt(i, 7);
@@ -171,6 +176,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horariojueves.setHoracomienzo(datos[0]);
             horariojueves.setHorafin(datos[1]);
             horariosfuncio.add(horariojueves);
+            main.Horarios.add(horariojueves);
             CPrincipal.getInstance().persist(horariojueves);
             }
             datosuwu = (String) TablaDatos.getValueAt(i, 9);
@@ -182,6 +188,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horarioviernes.setHoracomienzo(datos[0]);
             horarioviernes.setHorafin(datos[1]);
             horariosfuncio.add(horarioviernes);
+            main.Horarios.add(horarioviernes);
             CPrincipal.getInstance().persist(horarioviernes);
             
             }
@@ -194,7 +201,8 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 horariosabado.setHoracomienzo(datos[0]);
                 horariosabado.setHorafin(datos[1]);
                 horariosfuncio.add(horariosabado);
-                 CPrincipal.getInstance().persist(horariosabado);
+                main.Horarios.add(horariosabado);
+                CPrincipal.getInstance().persist(horariosabado);
 
             }
             datosuwu = (String) TablaDatos.getValueAt(i, 13);
@@ -206,6 +214,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 horariodomingo.setHoracomienzo(datos[0]);
                 horariodomingo.setHorafin(datos[1]);
                 horariosfuncio.add(horariodomingo);
+                main.Horarios.add(horariodomingo);
                 CPrincipal.getInstance().persist(horariodomingo);
             }
            

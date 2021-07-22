@@ -42,25 +42,28 @@ public class ctrl_controladoravisos {
         while (it.hasNext()) {
             funcionario p = it.next();
             Iterator<carnets> it2 = p.getCarnetsdelfuncionario().iterator();
-            while (it2.hasNext()) {
-                carnets x = it2.next();
+            if (!p.isEliminado()) {
+                while (it2.hasNext()) {
+                    carnets x = it2.next();
 
-                if (x.getFechavencimiento().after(new Date()) && x.getFechavencimiento().before(fin)) {
-                    main.funcionariosconcarnetporvencer.add(x);
-                } else if (x.getFechavencimiento().before(new Date())) {
-                    main.funcionariosconcarnetvencido.add(x);
+                    if (x.getFechavencimiento().after(new Date()) && x.getFechavencimiento().before(fin)) {
+                        main.funcionariosconcarnetporvencer.add(x);
+                         x.setEstado("PorVencer");
+                    } else if (x.getFechavencimiento().before(new Date())) {
+                         x.setEstado("Vencido");
+                        main.funcionariosconcarnetvencido.add(x);
+                    }
+
+                }
+                if (!main.funcionariosconcarnetvencido.isEmpty()) {
+                    funcionariosvencidos.cargartablavencidos();
+                }
+                if (!main.funcionariosconcarnetporvencer.isEmpty()) {
+                    funcionariosvencidos.cargartablaporvencer();
                 }
 
             }
-            if (!main.funcionariosconcarnetvencido.isEmpty()) {
-                funcionariosvencidos.cargartablavencidos();
-            }
-            if (!main.funcionariosconcarnetporvencer.isEmpty()) {
-                funcionariosvencidos.cargartablaporvencer();
-            }
-
         }
-
     }
 
     public void avisarcumpleaños(List<funcionario> funciolist) {
@@ -69,25 +72,25 @@ public class ctrl_controladoravisos {
         calendario.add(Calendar.DAY_OF_YEAR, 10);
         Date fin = calendario.getTime();
         DefaultListModel modelo = new DefaultListModel();
-         SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM");
-         
-         if ( main.jList1Cumpleanitos.getModel().getSize() != 0) {
-                /*SI TIENE TELEFONOS AGREGADOS*/
-                modelo = (DefaultListModel)main.jList1Cumpleanitos.getModel();
-                modelo.clear();
-            }
- 
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM");
+
+        if (main.jList1Cumpleanitos.getModel().getSize() != 0) {
+            /*SI TIENE TELEFONOS AGREGADOS*/
+            modelo = (DefaultListModel) main.jList1Cumpleanitos.getModel();
+            modelo.clear();
+        }
+
         Iterator<funcionario> it = funciolist.iterator();
         while (it.hasNext()) {
             funcionario p = it.next();
-            if (p.getFechaNacimiento().after(new Date()) && p.getFechaNacimiento().before(fin)) {
+            if (!p.isEliminado()) {
+                if (p.getFechaNacimiento().after(new Date()) && p.getFechaNacimiento().before(fin)) {
 
-                modelo.addElement(p + " " + p.getApellido()+" Fecha cumpleaños:"+dt1.format(p.getFechaNacimiento()));
-                main.jList1Cumpleanitos.setModel(modelo);
-                
+                    modelo.addElement(p + " " + p.getApellido() + " Fecha cumpleaños:" + dt1.format(p.getFechaNacimiento()));
+                    main.jList1Cumpleanitos.setModel(modelo);
 
+                }
             }
-
         }
     }
 }

@@ -14,6 +14,7 @@ import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
     public static funcionario funcio = null;
     public static boolean activo = false;
     int cantidaddecarnets = 0;
+    JLabel label = new JLabel();
 
     public administrarfuncionarios() {
         initComponents();
@@ -48,6 +50,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
         jButton6Times = new javax.swing.JButton();
         jButton7Observation = new javax.swing.JButton();
         jButton8ViewFails = new javax.swing.JButton();
+        jButton1Logros = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
@@ -201,8 +204,16 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1Logros.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1Logros.setText("Logros");
+        jButton1Logros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1LogrosActionPerformed(evt);
+            }
+        });
+
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Logros");
+        jButton1.setText("Eliminar Funcionario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -225,23 +236,28 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton5ChangeOcupation)
-                                .addGap(72, 72, 72)
-                                .addComponent(jButton6Times, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton5ChangeOcupation)
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jButton6Times, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton4ModOtherData)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton8ViewFails)
+                                        .addGap(31, 31, 31)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton7Observation)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton1Logros)
+                                        .addGap(9, 9, 9))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jButton4ModOtherData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                                .addComponent(jButton8ViewFails)
-                                .addGap(31, 31, 31)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7Observation)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
                                 .addComponent(jButton1)
-                                .addGap(9, 9, 9)))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +269,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4ModOtherData)
                             .addComponent(jButton8ViewFails)
-                            .addComponent(jButton1))
+                            .addComponent(jButton1Logros))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5ChangeOcupation)
@@ -261,7 +277,9 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                             .addComponent(jButton7Observation))
                         .addGap(16, 16, 16)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(5, 5, 5)
                         .addComponent(jButton3)))
                 .addGap(35, 35, 35))
         );
@@ -285,19 +303,22 @@ public void desactivarcarnets() {
         jDateChooserCarnet.setEnabled(true);
         jButton1RenovarCarnet.setEnabled(true);
     }
-    public void activartodoslosbotones(){
+
+    public void activartodoslosbotones() {
         jButton4ModOtherData.setEnabled(true);
         jButton5ChangeOcupation.setEnabled(true);
         jButton6Times.setEnabled(true);
         jButton7Observation.setEnabled(true);
         jButton8ViewFails.setEnabled(true);
     }
-   public void desactivartodoslosbotones(){
+
+    public void desactivartodoslosbotones() {
         jButton4ModOtherData.setEnabled(false);
         jButton5ChangeOcupation.setEnabled(false);
         jButton6Times.setEnabled(false);
         jButton7Observation.setEnabled(false);
         jButton8ViewFails.setEnabled(false);
+        jButton1Logros.setEnabled(false);
     }
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
         vaciarcampos();
@@ -426,13 +447,31 @@ public void desactivarcarnets() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ViewFailsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         cargaryverlogros.funcio3 = funcio;
+    private void jButton1LogrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1LogrosActionPerformed
+        cargaryverlogros.funcio3 = funcio;
         if (cargaryverlogros.activo == false) {
             cargaryverlogros AU = new cargaryverlogros();
             main.jDesktopPane1.add(AU);
             AU.setVisible(true);
 
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1LogrosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        label.setText("<html>Esta seguro que quiere eliminar este Funcionario?");
+        int resp = JOptionPane.showConfirmDialog(null, label, "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            funcio = (funcionario) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
+            if (funcio.isEliminado()) {
+                funcio.setEliminado(false);
+            } else {
+                funcio.setEliminado(true);
+
+                CPrincipal.getInstance().merge(funcio);
+                cargartabla();
+                vaciarcampos();
+            }
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -442,37 +481,36 @@ public void desactivarcarnets() {
         Iterator<funcionario> it = main.funcionarios.iterator();
         while (it.hasNext()) {
             funcionario next = it.next();
-            //      if (next.isEliminado() != true) {
-            //Object[] fila = new Object[5];
-            Object[] fila = new Object[6];
-            fila[0] = next;
-            fila[1] = next.getApellido();
-            fila[2] = next.getCedula();
-            fila[4] = next.getCelular();
-            fila[3] = next.getFechaNacimiento();
-            fila[5] = calcularantiguedad(next.getFechaIngreso(),new Date());
-            md1.addRow(fila);
-            //fila[3] = next.getTelefonos();
-            //fila[4] = next.getRepartidores();
-
-            //  }
+            if (next.isEliminado() != true) {
+                Object[] fila = new Object[6];
+                fila[0] = next;
+                fila[1] = next.getApellido();
+                fila[2] = next.getCedula();
+                fila[4] = next.getCelular();
+                fila[3] = next.getFechaNacimiento();
+                fila[5] = calcularantiguedad(next.getFechaIngreso(), new Date());
+                md1.addRow(fila);
+            }
         }
     }
-    public String calcularantiguedad(Date first,Date last){
-    Calendar a = getCalendar(first);
-    Calendar b = getCalendar(last);
-    int diff = b.get(YEAR) - a.get(YEAR);
-    if (a.get(MONTH) > b.get(MONTH) || 
-        (a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
-        diff--;
+
+    public String calcularantiguedad(Date first, Date last) {
+        Calendar a = getCalendar(first);
+        Calendar b = getCalendar(last);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH)
+                || (a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
+            diff--;
+        }
+        return diff + " Años";
     }
-    return diff+" Años";
-    }
+
     public static Calendar getCalendar(Date date) {
-    Calendar cal = Calendar.getInstance(Locale.US);
-    cal.setTime(date);
-    return cal;
-}
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
+    }
+
     public void vaciarcampos() {
         jDateChooserBrebet.setCalendar(null);
         jDateChooserCarnet.setCalendar(null);
@@ -502,6 +540,7 @@ public void desactivarcarnets() {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton1Logros;
     private javax.swing.JButton jButton1RenovarCarnet;
     private javax.swing.JButton jButton2RenovarBrebet;
     private javax.swing.JButton jButton3;

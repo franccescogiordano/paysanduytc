@@ -21,7 +21,15 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class funcionario implements Serializable {
+    private boolean eliminado = false;
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
     @OneToMany(mappedBy = "funcionariobservado")
     private List<observacion> observaciones;
 

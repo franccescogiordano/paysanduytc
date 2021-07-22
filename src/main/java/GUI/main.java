@@ -39,7 +39,6 @@ public class main extends javax.swing.JFrame {
      * Creates new form main
      */
     public static funcionariosvencidos AUd;
-    public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static List<cargo> cargos;
     public static List<horarios> Horarios;
     public static List<funcionario> funcionarios;
@@ -54,26 +53,13 @@ public class main extends javax.swing.JFrame {
         this.setMinimumSize(screenSize);
         cargos = ctrlfuncionario.cargarcargos();
         funcionarios = ctrlfuncionario.cargarfuncionarios();
-        Horarios = ctrlfuncionario.CargarHorarios();
-       
-          funcionario funcio=controladorfuncionario.findfuncionario("FRANCCESCO GIORDANO");
-          funcio.getHorariosdelfuncionario().clear();
-          horarios pepe= new horarios();
-          pepe.setDia("lunes");
-          pepe.setHoracomienzo("8");
-          pepe.setHorafin("13");
-          pepe.setOcupacion("rascahuevo");
-          horariosfuncio.add(pepe);
-          funcio.setHorariosdelfuncionario(horariosfuncio);
-          CPrincipal.getInstance().persist(pepe);
-          
+        Horarios = ctrlfuncionario.CargarHorarios();   
         if (funcionariosvencidos.activo == false) {
             main.AUd = new funcionariosvencidos();
             jDesktopPane1.add(main.AUd);
             Dimension desktopSize = screenSize;
             Dimension FrameSize = main.AUd.getSize();
             main.AUd.setLocation((desktopSize.width - FrameSize.width), (desktopSize.height - FrameSize.height));
-
             main.AUd.setVisible(true);
         }
         new ActualizarDatos().start();

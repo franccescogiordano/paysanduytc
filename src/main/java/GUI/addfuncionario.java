@@ -448,7 +448,6 @@ public class addfuncionario extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         funcio2= null;
         activo = false;
-        // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed

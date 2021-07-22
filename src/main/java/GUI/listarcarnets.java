@@ -24,7 +24,7 @@ public class listarcarnets extends javax.swing.JInternalFrame {
     public static boolean activo = false;
 
     public listarcarnets() {
-        activo=true;
+        activo = true;
         initComponents();
         cargartabla();
     }
@@ -41,6 +41,7 @@ public class listarcarnets extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -59,6 +60,7 @@ public class listarcarnets extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -101,28 +103,28 @@ public class listarcarnets extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
-  public void cargartabla() {
+    public void cargartabla() {
         Iterator<carnets> itx;
         DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
         md1.setRowCount(0);
         Iterator<funcionario> it = main.funcionarios.iterator();
         while (it.hasNext()) {
             funcionario next = it.next();
-            //      if (next.isEliminado() != true) {
-            //Object[] fila = new Object[5];
-            itx = next.getCarnetsdelfuncionario().iterator();
-            while (itx.hasNext()) {
-                carnets next1 = itx.next();
-                Object[] fila = new Object[3];
-                fila[0] = next;
-                fila[1] = next1.getTipocarnet();
-                fila[2] = cambiarformatofecha(next1.getFechavencimiento());
-                md1.addRow(fila);
-            }
+            if (next.isEliminado() != true) {
 
+                itx = next.getCarnetsdelfuncionario().iterator();
+                while (itx.hasNext()) {
+                    carnets next1 = itx.next();
+                    Object[] fila = new Object[3];
+                    fila[0] = next;
+                    fila[1] = next1.getTipocarnet();
+                    fila[2] = cambiarformatofecha(next1.getFechavencimiento());
+                    md1.addRow(fila);
+                }
+            }
         }
     }
 

@@ -27,7 +27,15 @@ public class carnets implements Serializable {
     private String tipocarnet;
     private Date fechavencimiento;
     private Date FechaRenovacion;
-    
+    private String estado="Vigente";
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
     @ManyToOne
     private funcionario funcionariodueniodelcarne;
 

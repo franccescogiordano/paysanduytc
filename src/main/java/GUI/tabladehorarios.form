@@ -64,19 +64,19 @@
               <Table columnCount="15" rowCount="4">
                 <Column editable="true" title="NOMBRE" type="java.lang.Object"/>
                 <Column editable="true" title="LUNES" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="MARTES" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="MIERCOLES" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="JUEVES" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="VIERNES" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="SABADO" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
                 <Column editable="true" title="DOMINGO" type="java.lang.Object"/>
-                <Column editable="true" title="OCUPACION" type="java.lang.Object"/>
+                <Column editable="true" title="OCUP" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -170,6 +170,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Guardar Datos"/>
       </Properties>
       <Events>
@@ -178,6 +181,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cargar tabla con excel"/>
       </Properties>
       <Events>
