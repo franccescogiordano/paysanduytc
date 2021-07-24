@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,6 +23,9 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class horarios implements Serializable {
+
+    @ManyToOne
+    private funcionario funcionarioasignado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,8 +43,14 @@ public class horarios implements Serializable {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
-    @ManyToMany
-    private List<funcionario>funcionariosasignados;
+
+    public funcionario getFuncionarioasignado() {
+        return funcionarioasignado;
+    }
+
+    public void setFuncionarioasignado(funcionario funcionarioasignado) {
+        this.funcionarioasignado = funcionarioasignado;
+    }
 
     public String getDia() {
         return dia;
@@ -65,13 +76,7 @@ public class horarios implements Serializable {
         this.horafin = horafin;
     }
 
-    public List<funcionario> getFuncionariosasignados() {
-        return funcionariosasignados;
-    }
-
-    public void setFuncionariosasignados(List<funcionario> funcionariosasignados) {
-        this.funcionariosasignados = funcionariosasignados;
-    }
+ 
     public Long getId() {
         return id;
     }

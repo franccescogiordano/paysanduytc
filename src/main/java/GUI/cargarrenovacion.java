@@ -12,6 +12,7 @@ import CONTROLADORES.controladorfuncionario;
 import PERSISTENCIA.CPrincipal;
 import java.util.Collections;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,25 +22,24 @@ public class cargarrenovacion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form cargarrenovacion
-     * 
-     */ 
-    controladorfuncionario  CF= new controladorfuncionario();
+     *
+     */
+    controladorfuncionario CF = new controladorfuncionario();
     public static boolean activo = false;
-    
+
     public static funcionario funcio3;
+
     public cargarrenovacion() {
-        activo=true;
+        activo = true;
         initComponents();
-         CF.CargarCBoxCargos2();
-    int cantidadcargos=funcio3.getFechacargobtenido().size();
-        if(cantidadcargos>0){
-         
-        
-        
-        Collections.sort(funcio3.getFechacargobtenido(), (o1, o2) -> o1.getFechaObtencionCargo().compareTo(o2.getFechaObtencionCargo()));
-       jLabel3.setText(funcio3.getFechacargobtenido().get(cantidadcargos-1).getCargoobtenido().getCargo());
-        }else{
-            
+        CF.CargarCBoxCargos2();
+        int cantidadcargos = funcio3.getFechacargobtenido().size();
+        if (cantidadcargos > 0) {
+
+            Collections.sort(funcio3.getFechacargobtenido(), (o1, o2) -> o1.getFechaObtencionCargo().compareTo(o2.getFechaObtencionCargo()));
+            jLabel3.setText(funcio3.getFechacargobtenido().get(cantidadcargos - 1).getCargoobtenido().getCargo());
+        } else {
+
         }
     }
 
@@ -58,6 +58,7 @@ public class cargarrenovacion extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -130,20 +131,20 @@ public class cargarrenovacion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Date fecha= new Date();
-        obtienecargo nuevocargo= new obtienecargo();
-        nuevocargo.setCargoobtenido((cargo)jComboBox1.getSelectedItem());
+        Date fecha = new Date();
+        obtienecargo nuevocargo = new obtienecargo();
+        nuevocargo.setCargoobtenido((cargo) jComboBox1.getSelectedItem());
         nuevocargo.setFechaObtencionCargo(fecha);
         nuevocargo.setFuncionarioasignado(funcio3);
-        
         CPrincipal.getInstance().persist(nuevocargo);
-        
         CPrincipal.getInstance().refresh(funcio3);
+        JOptionPane.showMessageDialog(null, "Cargo actualizado correctamente", null, JOptionPane.OK_OPTION);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
 

@@ -43,8 +43,17 @@ public class funcionario implements Serializable {
     @OneToMany(mappedBy = "licenciadefuncionario")
     private List<licencia> licencias;
 
-    @ManyToMany(mappedBy = "funcionariosasignados")
+
+    @OneToMany(mappedBy = "funcionarioasignado")
     private List<horarios> horariosdelfuncionario;
+
+    public List<horarios> getHorariosdelfuncionario() {
+        return horariosdelfuncionario;
+    }
+
+    public void setHorariosdelfuncionario(List<horarios> horariosdelfuncionario) {
+        this.horariosdelfuncionario = horariosdelfuncionario;
+    }
 
     @OneToMany(mappedBy = "funcionariofalta")
     private List<faltas> faltasdelfuncionario;
@@ -120,13 +129,7 @@ public class funcionario implements Serializable {
         this.licencias = licencias;
     }
 
-    public List<horarios> getHorariosdelfuncionario() {
-        return horariosdelfuncionario;
-    }
-
-    public void setHorariosdelfuncionario(List<horarios> horariosdelfuncionario) {
-        this.horariosdelfuncionario = horariosdelfuncionario;
-    }
+   
 
     public List<faltas> getFaltasdelfuncionario() {
         return faltasdelfuncionario;

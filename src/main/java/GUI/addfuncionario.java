@@ -224,6 +224,8 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Cedula");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 110, -1, -1));
+
+        jDateChooserLibreta.setDateFormatString("dd-MM-yyyy");
         jPanel1.add(jDateChooserLibreta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 438, 153, -1));
 
         jCheckBox3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -234,7 +236,9 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 443, -1, -1));
-        jPanel1.add(jDateChooserIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 260, -1));
+
+        jDateChooserIngreso.setDateFormatString("dd-MM-yyyy");
+        jPanel1.add(jDateChooserIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 250, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Fecha Ingreso");
@@ -247,7 +251,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

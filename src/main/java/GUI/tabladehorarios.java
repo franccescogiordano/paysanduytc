@@ -10,12 +10,17 @@ import CLASES.horarios;
 import CONTROLADORES.controladorfuncionario;
 import CONTROLADORES.excel;
 import PERSISTENCIA.CPrincipal;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -30,10 +35,15 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     excel ex = new excel();
     public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static boolean activo = false;
+    controladorfuncionario CF =  new controladorfuncionario();
 
     public tabladehorarios() {
-        activo=true;
+        activo = true;
         initComponents();
+        TableColumn sportColumn = TablaDatos.getColumnModel().getColumn(0);
+        JComboBox comboBox = new JComboBox();
+        CF.CargarCBoxFuncios(comboBox);
+        sportColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }
 
     /**
@@ -49,7 +59,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         TablaDatos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
+        setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -71,15 +83,17 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         TablaDatos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "NOMBRE", "LUNES", "OCUP", "MARTES", "OCUP", "MIERCOLES", "OCUP", "JUEVES", "OCUP", "VIERNES", "OCUP", "SABADO", "OCUP", "DOMINGO", "OCUP"
             }
         ));
+        TablaDatos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TablaDatosKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDatos);
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -98,16 +112,26 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton4.setText("NuevaTupla");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1469, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
+                .addGap(328, 328, 328)
                 .addComponent(jButton2)
-                .addGap(228, 228, 228)
+                .addGap(85, 85, 85)
                 .addComponent(jButton1)
+                .addGap(95, 95, 95)
+                .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,7 +142,8 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -127,104 +152,92 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String datosuwu;
-        String[] datos;
+
+       
         for (int i = 0; i < TablaDatos.getRowCount(); i++) {
-            datosuwu = (String) TablaDatos.getValueAt(i, 1);
-            if (!datosuwu.equals("descansa")) {
-            horarios horariolunes = new horarios();
+             horariosfuncio.clear();
             funcio = controladorfuncionario.findfuncionario((String) TablaDatos.getValueAt(i, 0));
-            horariolunes.setDia("Lunes");     
-            horariolunes.setOcupacion((String) TablaDatos.getValueAt(i, 2));
-            datos = datosuwu.split("a");
+            if (funcio != null) {
+                datosuwu = (String) TablaDatos.getValueAt(i, 1);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 2), "Lunes");
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 3);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 4), "Martes");
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 5);
+
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 6), "Miercoles");
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 7);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 8), "Jueves");
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 9);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 10), "Viernes");
+
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 11);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 12), "Sabado");
+
+                }
+
+                datosuwu = (String) TablaDatos.getValueAt(i, 13);
+                if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
+                    crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 14), "Domingo");
+                }
+
+                funcio.setHorariosdelfuncionario(horariosfuncio);
+                System.out.println(funcio);
+                CPrincipal.getInstance().merge(funcio);
+            } else {
+                System.out.println("NOEXISTE!!!!!!!!!!!!!!!!!!!!");
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void crearhorario(String datosuwu, String ocup, String dia) {
+        boolean masdeuno = false;
+        String temporal;
+        int contador = 1;
+        String datos[];
+        String madeunhorario[] = null;
+        if (datosuwu.contains("/")) {
+            masdeuno = true;
+            contador++;
+            madeunhorario = datosuwu.split("/"); //0 y 1 osea 2
+        } else {
+
+        }
+        for (int i = 0; i < contador; i++) {
+            if (masdeuno == true) {
+                temporal = madeunhorario[i];
+                datos = temporal.split("a");
+            } else {
+                datos = datosuwu.split("a");
+            }
+            horarios horariolunes = new horarios();
+            horariolunes.setDia(dia);
+            horariolunes.setOcupacion(ocup);
             horariolunes.setHoracomienzo(datos[0]);
             horariolunes.setHorafin(datos[1]);
             horariosfuncio.add(horariolunes);
             main.Horarios.add(horariolunes);
-             CPrincipal.getInstance().persist(horariolunes);
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 3);
-            if (!datosuwu.equals("descansa")) {
-            horarios horariomartes = new horarios();
-            horariomartes.setDia("Martes");
-            horariomartes.setOcupacion((String) TablaDatos.getValueAt(i, 4));   
-            datos = datosuwu.split("a");
-            horariomartes.setHoracomienzo(datos[0]);
-            horariomartes.setHorafin(datos[1]);
-            horariosfuncio.add(horariomartes);
-            main.Horarios.add(horariomartes);
-            CPrincipal.getInstance().persist(horariomartes);
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 5);
-            
-            if (!datosuwu.equals("descansa")) {
-            horarios horariomiercoles = new horarios();
-            horariomiercoles.setDia("Miercoles");
-            horariomiercoles.setOcupacion((String) TablaDatos.getValueAt(i, 6));
-            datos = datosuwu.split("a");
-            horariomiercoles.setHoracomienzo(datos[0]);
-            horariomiercoles.setHorafin(datos[1]);
-            horariosfuncio.add(horariomiercoles); 
-            main.Horarios.add(horariomiercoles);
-            CPrincipal.getInstance().persist(horariomiercoles);
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 7);
-            if (!datosuwu.equals("descansa")) {
-            horarios horariojueves = new horarios();
-            horariojueves.setDia("Jueves");
-            horariojueves.setOcupacion((String) TablaDatos.getValueAt(i, 8));
-            datos = datosuwu.split("a");
-            horariojueves.setHoracomienzo(datos[0]);
-            horariojueves.setHorafin(datos[1]);
-            horariosfuncio.add(horariojueves);
-            main.Horarios.add(horariojueves);
-            CPrincipal.getInstance().persist(horariojueves);
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 9);
-            if (!datosuwu.equals("descansa")) {
-            horarios horarioviernes = new horarios();
-            horarioviernes.setDia("Viernes");
-            horarioviernes.setOcupacion((String) TablaDatos.getValueAt(i, 10));
-            datos = datosuwu.split("a");
-            horarioviernes.setHoracomienzo(datos[0]);
-            horarioviernes.setHorafin(datos[1]);
-            horariosfuncio.add(horarioviernes);
-            main.Horarios.add(horarioviernes);
-            CPrincipal.getInstance().persist(horarioviernes);
-            
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 11);
-            if (!datosuwu.equals("descansa")) {
-                horarios horariosabado = new horarios();
-                horariosabado.setDia("Sabado");
-                horariosabado.setOcupacion((String) TablaDatos.getValueAt(i, 12));
-                datos = datosuwu.split("a");
-                horariosabado.setHoracomienzo(datos[0]);
-                horariosabado.setHorafin(datos[1]);
-                horariosfuncio.add(horariosabado);
-                main.Horarios.add(horariosabado);
-                CPrincipal.getInstance().persist(horariosabado);
-
-            }
-            datosuwu = (String) TablaDatos.getValueAt(i, 13);
-            if (!datosuwu.equals("descansa")) {
-                horarios horariodomingo = new horarios();
-                horariodomingo.setDia("Domingo");
-                horariodomingo.setOcupacion((String) TablaDatos.getValueAt(i, 14));
-                datos = datosuwu.split("a");
-                horariodomingo.setHoracomienzo(datos[0]);
-                horariodomingo.setHorafin(datos[1]);
-                horariosfuncio.add(horariodomingo);
-                main.Horarios.add(horariodomingo);
-                CPrincipal.getInstance().persist(horariodomingo);
-            }
-           
-            funcio.setHorariosdelfuncionario(horariosfuncio);
-
-            CPrincipal.getInstance().merge(funcio);
+            horariolunes.setFuncionarioasignado(funcio);
+            CPrincipal.getInstance().persist(horariolunes);
         }
-      
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JFileChooser selecArchivo = new JFileChooser();
         File archivo;
@@ -233,7 +246,6 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
             archivo = selecArchivo.getSelectedFile();
             if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
-
                 ex.procesarexcel2(archivo);
                 JOptionPane.showMessageDialog(null, "Datos cargados con exito");
             } else {
@@ -244,15 +256,27 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo=true;
+        activo = true;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void TablaDatosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaDatosKeyPressed
+      
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaDatosKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel)TablaDatos.getModel();
+        modelo.addRow(new Object[1]);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TablaDatos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

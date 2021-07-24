@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,6 +39,7 @@ public class controladorfuncionario {
     
 }
  public static funcionario findfuncionario(String nombreapellido){
+    if(nombreapellido.contains(" ")){
      String nombre;
      String apellido;
      String[] datos = nombreapellido.split(" ");
@@ -53,6 +55,7 @@ public class controladorfuncionario {
          }
          
      }
+    }
      return null;
  }
 
@@ -94,6 +97,22 @@ public class controladorfuncionario {
             Iterator<cargo> it = main.cargos.iterator();
             while (it.hasNext()) {
                 mdl.addElement(it.next());
+            }
+        }
+        //AddProducto.tipocbox.setModel(mdl);
+    }
+  public void CargarCBoxFuncios(JComboBox combobox){
+        //DefaultComboBoxModel mdl = new DefaultComboBoxModel();
+        DefaultComboBoxModel mdl = (DefaultComboBoxModel) combobox.getModel();
+        mdl.removeAllElements();
+        mdl.addElement("---Escoje---");
+        if (main.cargos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay Funcionarios registrados, registre al menos uno para poder registrar", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else {
+            Iterator<funcionario> it = main.funcionarios.iterator();
+            while (it.hasNext()) {
+                funcionario next=it.next();
+                mdl.addElement(next+" "+next.getApellido());
             }
         }
         //AddProducto.tipocbox.setModel(mdl);
