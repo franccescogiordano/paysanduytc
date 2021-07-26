@@ -55,9 +55,12 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             jTextFieldCedula.setText(String.valueOf(funcio2.getCedula()));
             jTextFieldCelular.setText(funcio2.getCelular());
             jLabel6.setText("");
+            jLabel7.setText("");
             jComboBoxCargo.setVisible(false);
             jDateChooserCarnet.setVisible(false);
             jDateChooserBrebet.setVisible(false);
+            jDateChooserIngreso.setVisible(false);
+            jCheckBox3.setVisible(false);
             jCheckBox1.setVisible(false);
             jCheckBox2.setVisible(false);
             jDateChooserFecha.setDate(funcio2.getFechaNacimiento());
@@ -100,6 +103,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jDateChooserIngreso = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -119,6 +123,7 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(28, 28, 28));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -168,23 +173,29 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jDateChooserFecha.setDateFormatString("dd-MM-yyyy");
         jPanel1.add(jDateChooserFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 151, 257, -1));
 
+        jButtonModificar.setBackground(new java.awt.Color(1, 87, 155));
         jButtonModificar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonModificar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/disquete.png"))); // NOI18N
         jButtonModificar.setText("Modificar");
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 516, -1, -1));
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, -1, -1));
 
+        jButtonAgregar.setBackground(new java.awt.Color(0, 204, 51));
         jButtonAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButtonAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/boton-agregar.png"))); // NOI18N
         jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 516, -1, -1));
+        jPanel1.add(jButtonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, -1, -1));
 
         jTextFieldNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 16, 257, -1));
@@ -251,13 +262,13 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
 

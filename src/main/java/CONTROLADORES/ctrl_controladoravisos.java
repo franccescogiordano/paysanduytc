@@ -12,6 +12,7 @@ import GUI.funcionariosvencidos;
 import GUI.main;
 import static GUI.main.jDesktopPane1;
 import GUI.renovarcarnet;
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,6 +33,8 @@ import javax.swing.table.DefaultTableModel;
  * @author franc
  */
 public class ctrl_controladoravisos {
+
+    public Icon icono = new ImageIcon(getClass().getResource("/META-INF/check.png"));
 
     public void avisarcarnevencido(List<funcionario> funciolist) {
         main.funcionariosconcarnetporvencer.clear();
@@ -48,9 +55,9 @@ public class ctrl_controladoravisos {
 
                     if (x.getFechavencimiento().after(new Date()) && x.getFechavencimiento().before(fin)) {
                         main.funcionariosconcarnetporvencer.add(x);
-                         x.setEstado("PorVencer");
+                        x.setEstado("PorVencer");
                     } else if (x.getFechavencimiento().before(new Date())) {
-                         x.setEstado("Vencido");
+                        x.setEstado("Vencido");
                         main.funcionariosconcarnetvencido.add(x);
                     }
 
@@ -92,5 +99,12 @@ public class ctrl_controladoravisos {
                 }
             }
         }
+    }
+
+    public void carteldeok() {
+        JLabel label = new JLabel();
+        label.setText("Horarios Cargados correctamente");
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+        JOptionPane.showMessageDialog(null, label, null, JOptionPane.OK_OPTION, icono);
     }
 }

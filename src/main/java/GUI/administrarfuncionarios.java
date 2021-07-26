@@ -7,6 +7,7 @@ package GUI;
 
 import CLASES.funcionario;
 import PERSISTENCIA.CPrincipal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
@@ -52,14 +53,16 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
         jDateChooserLibreta = new com.toedter.calendar.JDateChooser();
         jButton2RenovarLibreta = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton1Delete = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jButton4ModOtherData = new javax.swing.JButton();
         jButton5ChangeOcupation = new javax.swing.JButton();
         jButton6Times = new javax.swing.JButton();
-        jButton7Observation = new javax.swing.JButton();
         jButton8ViewFails = new javax.swing.JButton();
+        jButton7Observation = new javax.swing.JButton();
         jButton1Logros = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         setTitle("ADMINISTAR FUNCIONARIOS");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -80,6 +83,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        mdl1.setBackground(new java.awt.Color(28, 28, 28));
         mdl1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         mdl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,6 +104,7 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        mdl1.setShowGrid(true);
         mdl1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mdl1MouseClicked(evt);
@@ -107,7 +112,8 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(mdl1);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CARNETS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel1.setBackground(new java.awt.Color(28, 28, 28));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CARNETS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jDateChooserCarnet.setDateFormatString("dd-MM-yyyy");
         jDateChooserCarnet.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -180,15 +186,35 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30))
         );
 
+        jButton3.setBackground(new java.awt.Color(255, 204, 51));
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setText("Limpiar campos");
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/limpiar.png"))); // NOI18N
+        jButton3.setText("Limpiar Seleccion");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        jButton1Delete.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1Delete.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1Delete.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/delete.png"))); // NOI18N
+        jButton1Delete.setText("Eliminar Funcionario");
+        jButton1Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1DeleteActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(28, 28, 28));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OPCIONES VARIAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
+
+        jButton4ModOtherData.setBackground(new java.awt.Color(1, 87, 155));
         jButton4ModOtherData.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton4ModOtherData.setForeground(new java.awt.Color(0, 0, 0));
+        jButton4ModOtherData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/editar.png"))); // NOI18N
         jButton4ModOtherData.setText("Modificar Otros Datos");
         jButton4ModOtherData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +222,10 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton5ChangeOcupation.setBackground(new java.awt.Color(255, 102, 102));
         jButton5ChangeOcupation.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton5ChangeOcupation.setForeground(new java.awt.Color(0, 0, 0));
+        jButton5ChangeOcupation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/sombrero.png"))); // NOI18N
         jButton5ChangeOcupation.setText("Cambiar Cargo");
         jButton5ChangeOcupation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,23 +233,21 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton6Times.setBackground(new java.awt.Color(0, 204, 204));
         jButton6Times.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton6Times.setText("Horarios");
+        jButton6Times.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6Times.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/reloj-con-sentido-horario.png"))); // NOI18N
+        jButton6Times.setText("Asignar Horarios");
         jButton6Times.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6TimesActionPerformed(evt);
             }
         });
 
-        jButton7Observation.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton7Observation.setText("Observar");
-        jButton7Observation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ObservationActionPerformed(evt);
-            }
-        });
-
+        jButton8ViewFails.setBackground(new java.awt.Color(255, 153, 153));
         jButton8ViewFails.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton8ViewFails.setForeground(new java.awt.Color(0, 0, 0));
+        jButton8ViewFails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/archivo.png"))); // NOI18N
         jButton8ViewFails.setText("Ver Observaciones");
         jButton8ViewFails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +255,21 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton7Observation.setBackground(new java.awt.Color(255, 255, 102));
+        jButton7Observation.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7Observation.setForeground(new java.awt.Color(0, 0, 0));
+        jButton7Observation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/observacion.png"))); // NOI18N
+        jButton7Observation.setText("Observar");
+        jButton7Observation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ObservationActionPerformed(evt);
+            }
+        });
+
+        jButton1Logros.setBackground(new java.awt.Color(153, 255, 153));
         jButton1Logros.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1Logros.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1Logros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/calidad.png"))); // NOI18N
         jButton1Logros.setText("Logros");
         jButton1Logros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,77 +277,79 @@ public class administrarfuncionarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Eliminar Funcionario");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton5ChangeOcupation)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton6Times)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7Observation))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton4ModOtherData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton8ViewFails)
+                        .addGap(9, 9, 9)
+                        .addComponent(jButton1Logros)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4ModOtherData)
+                    .addComponent(jButton8ViewFails)
+                    .addComponent(jButton1Logros))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5ChangeOcupation)
+                    .addComponent(jButton6Times)
+                    .addComponent(jButton7Observation))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton5ChangeOcupation)
-                                .addGap(61, 61, 61)
-                                .addComponent(jButton6Times, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton4ModOtherData)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton8ViewFails)
-                                .addGap(31, 31, 31)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7Observation)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1Logros)
-                                .addGap(9, 9, 9))))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jButton3)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addComponent(jButton1Delete)
+                            .addComponent(jButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4ModOtherData)
-                            .addComponent(jButton8ViewFails)
-                            .addComponent(jButton1Logros))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5ChangeOcupation)
-                            .addComponent(jButton6Times)
-                            .addComponent(jButton7Observation))
-                        .addGap(16, 16, 16)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addGap(170, 170, 170)
+                        .addComponent(jButton1Delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(19, 19, 19)))
-                .addGap(35, 35, 35))
+                        .addComponent(jButton3)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -343,6 +386,7 @@ public void desactivarcarnets() {
         jButton7Observation.setEnabled(true);
         jButton8ViewFails.setEnabled(true);
         jButton1Logros.setEnabled(true);
+        jButton1Delete.setEnabled(true);
     }
 
     public void desactivartodoslosbotones() {
@@ -352,6 +396,12 @@ public void desactivarcarnets() {
         jButton7Observation.setEnabled(false);
         jButton8ViewFails.setEnabled(false);
         jButton1Logros.setEnabled(false);
+        jButton1Delete.setEnabled(false);
+    }
+
+    public String cambiarformatofecha(Date date) {
+        SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
+        return ParaSaberLaHoraInicio.format(date);
     }
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
         vaciarcampos();
@@ -498,7 +548,7 @@ public void desactivarcarnets() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1LogrosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1DeleteActionPerformed
         label.setText("<html>Esta seguro que quiere eliminar este Funcionario?");
         int resp = JOptionPane.showConfirmDialog(null, label, "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (resp == JOptionPane.YES_OPTION) {
@@ -514,7 +564,7 @@ public void desactivarcarnets() {
             }
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1DeleteActionPerformed
 
     private void jButton2RenovarLibretaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2RenovarLibretaActionPerformed
         // TODO add your handling code here:
@@ -531,7 +581,7 @@ public void desactivarcarnets() {
                 fila[1] = next.getApellido();
                 fila[2] = next.getCedula();
                 fila[4] = next.getCelular();
-                fila[3] = next.getFechaNacimiento();
+                fila[3] = cambiarformatofecha(next.getFechaNacimiento());
                 fila[5] = calcularantiguedad(next.getFechaIngreso(), new Date());
                 md1.addRow(fila);
             }
@@ -583,7 +633,7 @@ public void desactivarcarnets() {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton1Delete;
     private javax.swing.JButton jButton1Logros;
     private javax.swing.JButton jButton1RenovarCarnet;
     private javax.swing.JButton jButton2RenovarBrebet;
@@ -598,6 +648,7 @@ public void desactivarcarnets() {
     private com.toedter.calendar.JDateChooser jDateChooserCarnet;
     private com.toedter.calendar.JDateChooser jDateChooserLibreta;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable mdl1;
     // End of variables declaration//GEN-END:variables

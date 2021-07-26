@@ -41,10 +41,15 @@ public class controlarllegastarde extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(28, 28, 28));
+        setClosable(true);
+        setTitle("CONTROLAR LLEGADAS TARDE");
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Verificar:");
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/excel.png"))); // NOI18N
         jButton1.setText("Cargar Excel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +57,7 @@ public class controlarllegastarde extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(28, 28, 28));
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,7 +86,7 @@ public class controlarllegastarde extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -99,7 +105,7 @@ public class controlarllegastarde extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,7 +121,7 @@ public class controlarllegastarde extends javax.swing.JInternalFrame {
             if (archivo.getName().endsWith("xls") || archivo.getName().endsWith("xlsx")) {
           
                 ex.procesarexcel(archivo);
-                JOptionPane.showMessageDialog(null, "Anduvoooooooooooooooooooooooooo");
+                JOptionPane.showMessageDialog(null, "Archivo cargado con exito!");
             } else {
                 JOptionPane.showMessageDialog(null, "Elija un formato valido.");
             }

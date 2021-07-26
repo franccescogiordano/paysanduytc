@@ -94,6 +94,7 @@ public class main extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -106,7 +107,12 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        jDesktopPane1.setBackground(new java.awt.Color(0, 102, 204));
+        jDesktopPane1.setForeground(new java.awt.Color(51, 51, 51));
+
+        jList1Cumpleanitos.setBackground(new java.awt.Color(153, 153, 153));
         jList1Cumpleanitos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jList1Cumpleanitos.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jList1Cumpleanitos);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -119,12 +125,15 @@ public class main extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(363, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(373, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,13 +142,22 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
-        jMenu2.setText("Funcionarios");
+        jMenuBar1.setBackground(new java.awt.Color(0, 153, 153));
+        jMenuBar1.setForeground(new java.awt.Color(51, 51, 51));
+
+        jMenu2.setBackground(new java.awt.Color(0, 153, 153));
+        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/funcionarios.png"))); // NOI18N
+        jMenu2.setText("   Funcionarios   ");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
+        jMenuItem1.setBackground(new java.awt.Color(204, 204, 204));
         jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/editar.png"))); // NOI18N
         jMenuItem1.setText("Administrar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +166,10 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setBackground(new java.awt.Color(204, 204, 204));
         jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem2.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/nuevofuncionario.png"))); // NOI18N
         jMenuItem2.setText("Cargar Nuevo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,10 +180,14 @@ public class main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Cargos");
+        jMenu3.setBackground(new java.awt.Color(0, 153, 153));
+        jMenu3.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/cargos.png"))); // NOI18N
+        jMenu3.setText("Cargos   ");
         jMenu3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         jMenuItem3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/boton-agregar.png"))); // NOI18N
         jMenuItem3.setText("Nuevo Cargo");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,10 +198,14 @@ public class main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Carnets");
+        jMenu4.setBackground(new java.awt.Color(0, 153, 153));
+        jMenu4.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/licencia-de-conducir.png"))); // NOI18N
+        jMenu4.setText(" Carnets  ");
         jMenu4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         jMenuItem5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/vertodos.png"))); // NOI18N
         jMenuItem5.setText("Ver todos");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,11 +216,15 @@ public class main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Horarios");
+        jMenu5.setBackground(new java.awt.Color(0, 153, 153));
+        jMenu5.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/horarios.png"))); // NOI18N
+        jMenu5.setText("Horarios   ");
         jMenu5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         jMenuItem7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jMenuItem7.setText("Cargar Nuevo Horario");
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/boton-agregar.png"))); // NOI18N
+        jMenuItem7.setText("Cargar tabla de horarios");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -200,6 +233,7 @@ public class main extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/vertodos.png"))); // NOI18N
         jMenuItem8.setText("Ver Todos");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +243,7 @@ public class main extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/llegadastarde.png"))); // NOI18N
         jMenuItem9.setText("Controlar Llegadas tarde");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +251,16 @@ public class main extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem9);
+
+        jMenuItem6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/llegadastarde.png"))); // NOI18N
+        jMenuItem6.setText("Controlar Hora salida ");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem6);
 
         jMenuItem10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem10.setText("Cargar horarios x dia");
@@ -228,8 +273,12 @@ public class main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu1.setBackground(new java.awt.Color(0, 153, 153));
+        jMenu1.setForeground(new java.awt.Color(51, 51, 51));
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/bd.png"))); // NOI18N
         jMenu1.setText("Base de datos");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/actualizar-pagina.png"))); // NOI18N
         jMenuItem4.setText("ActualizarBasedeDatos");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,6 +403,15 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        if (controlartefuisteantes.activo == false) {
+            controlartefuisteantes AU = new controlartefuisteantes();
+            jDesktopPane1.add(AU);
+            AU.setVisible(true);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +457,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;

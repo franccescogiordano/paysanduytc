@@ -8,16 +8,19 @@ package GUI;
 import CLASES.funcionario;
 import CLASES.horarios;
 import CONTROLADORES.controladorfuncionario;
+import CONTROLADORES.ctrl_controladoravisos;
 import CONTROLADORES.excel;
 import PERSISTENCIA.CPrincipal;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -36,7 +39,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static boolean activo = false;
     controladorfuncionario CF =  new controladorfuncionario();
-
+    ctrl_controladoravisos CA = new ctrl_controladoravisos();
     public tabladehorarios() {
         activo = true;
         initComponents();
@@ -60,6 +63,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -80,7 +84,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        TablaDatos.setBackground(new java.awt.Color(255, 255, 255));
         TablaDatos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TablaDatos.setForeground(new java.awt.Color(0, 0, 0));
         TablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
@@ -89,6 +95,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 "NOMBRE", "LUNES", "OCUP", "MARTES", "OCUP", "MIERCOLES", "OCUP", "JUEVES", "OCUP", "VIERNES", "OCUP", "SABADO", "OCUP", "DOMINGO", "OCUP"
             }
         ));
+        TablaDatos.setGridColor(new java.awt.Color(0, 0, 0));
+        TablaDatos.setSelectionForeground(new java.awt.Color(0, 204, 102));
+        TablaDatos.setShowGrid(true);
         TablaDatos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TablaDatosKeyPressed(evt);
@@ -96,7 +105,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TablaDatos);
 
+        jButton1.setBackground(new java.awt.Color(0, 204, 51));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Guardar Datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +123,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton4.setBackground(java.awt.SystemColor.textHighlight);
         jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton4.setForeground(java.awt.SystemColor.activeCaptionText);
         jButton4.setText("NuevaTupla");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,19 +133,31 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton3.setText("IMPRIMIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1469, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(328, 328, 328)
+                .addGap(37, 37, 37)
+                .addComponent(jButton3)
+                .addGap(50, 50, 50)
                 .addComponent(jButton2)
-                .addGap(85, 85, 85)
+                .addGap(60, 60, 60)
                 .addComponent(jButton1)
-                .addGap(95, 95, 95)
+                .addGap(115, 115, 115)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +168,8 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,13 +222,13 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 if (!datosuwu.equals("descansa") || !(datosuwu.equals("desc."))) {
                     crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 14), "Domingo");
                 }
-
                 funcio.setHorariosdelfuncionario(horariosfuncio);
                 System.out.println(funcio);
                 CPrincipal.getInstance().merge(funcio);
             } else {
-                System.out.println("NOEXISTE!!!!!!!!!!!!!!!!!!!!");
+               //no existe el funcionario
             }
+            CA.carteldeok();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -271,11 +297,23 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       MessageFormat header = new MessageFormat("Report Print");
+       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        try {
+            TablaDatos.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        } catch (java.awt.print.PrinterException e) {
+            System.err.format("No se puede imprimir %s%n",e.getMessage());
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TablaDatos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

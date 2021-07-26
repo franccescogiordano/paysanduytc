@@ -163,6 +163,131 @@ public class excel {
         return "buenardo";
 
     }
+    public String procesarsalidasantes(File archivo) {
+        DefaultTableModel md2 = (DefaultTableModel) controlarllegastarde.jTable1.getModel();
+        md2.setRowCount(0);
+        try {
+
+            String stringtemporal, stringtempora2 = "", stringtemporal3 = "";
+            Date horasdate;
+            Date horasdate2;
+            String dia = "";
+            String horafin = "";
+            Date x = new Date();
+
+            if (archivo.getName().endsWith("xlsx")) {
+                wb = WorkbookFactory.create(new FileInputStream(archivo));
+                Sheet hoja = wb.getSheetAt(0);
+                int limite = hoja.getPhysicalNumberOfRows();
+                for (int i = 1; i < limite; i++) {
+
+                    celda = hoja.getRow(i).getCell(1);
+                    String nombre = celda.getStringCellValue();
+                    celda = hoja.getRow(i).getCell(3);
+                    String fecha = celda.getStringCellValue();
+                    // System.out.println(" " + nombre + " " + fecha);
+                    funcionario funcio;
+                    funcio = controladorfuncionario.findfuncionario(nombre);
+                    Calendar calendar = Calendar.getInstance();
+
+                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    SimpleDateFormat formatoDelTexto2;
+
+                    try {
+
+                        x = formatoDelTexto.parse(fecha);
+                        calendar.setTime(x);
+
+                    } catch (ParseException ex) {
+
+                        ex.printStackTrace();
+
+                    }
+                    int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                    switch (dayOfWeek) {
+                        case 1:
+                            dia = "Domingo";
+                            break;
+                        case 2:
+                            dia = "Lunes";
+                            break;
+
+                        case 3:
+                            dia = "Martes";
+                            break;
+                        case 4:
+                            dia = "Miercoles";
+                            break;
+                        case 5:
+                            dia = "Jueves";
+                            break;
+                        case 6:
+                            dia = "Viernes";
+                            break;
+                        case 7:
+                            dia = "Sabado";
+                            break;
+                        default:
+                    }
+                    Iterator<horarios> it = funcio.getHorariosdelfuncionario().iterator();
+                    while (it.hasNext()) {
+                        long diferencia;
+                        horarios next = it.next();
+                        if (next.getDia().equals(dia)) {
+                           
+                            horafin = next.getHorafin();
+                            //verificar llegada tarde
+                            int horamenos1=Integer.parseInt(horafin);
+                            horamenos1--;
+                            horafin=String.valueOf(horamenos1);
+                            formatoDelTexto = new SimpleDateFormat("HH:mm");
+                            formatoDelTexto2 = new SimpleDateFormat("HH");
+                            horasdate = formatoDelTexto2.parse(horafin); //HORA DEL FUNCIONARIO de salida
+                            stringtemporal3 = formatoDelTexto.format(horasdate);
+                            horasdate = formatoDelTexto.parse(stringtemporal3);
+                            SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("HH");
+
+                            stringtempora2 = ParaSaberLaHoraInicio.format(x);
+                            stringtemporal = formatoDelTexto.format(x);
+                            stringtemporal3 = ParaSaberLaHoraInicio.format(horasdate);
+                            horasdate2 = formatoDelTexto.parse(stringtemporal);
+                            diferencia = horasdate.getTime() - horasdate2.getTime();
+                            long Difenminutos2;
+                            if (stringtemporal3.equals(stringtempora2)) {
+                                Difenminutos2 = diferencia / (60 * 1000);
+                                if (Difenminutos2 > 0) {
+                                    Object[] fila = new Object[3];
+                                    fila[0] = nombre;
+                                    fila[1] = cambiarformatofecha(x);
+                                    fila[2] = Difenminutos2 + " minutos";
+                                    md2.addRow(fila);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                HSSFCell celdax;
+                wbxls = new HSSFWorkbook(new FileInputStream(archivo));
+                HSSFSheet hoja = wbxls.getSheetAt(0);
+                int limite = hoja.getPhysicalNumberOfRows();
+                for (int i = 1; i < limite; i++) {
+
+                    celdax = hoja.getRow(i).getCell(1);
+                    String nombre = celdax.getStringCellValue();
+                    celdax = hoja.getRow(i).getCell(3);
+                    String fecha = celdax.getStringCellValue();
+                    System.out.println(" " + nombre + " " + fecha);
+
+                }
+
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return "buenardo";
+
+    }
 
     public String procesarexcel2(File archivo) {
         DefaultTableModel md2 = (DefaultTableModel) tabladehorarios.TablaDatos.getModel();
