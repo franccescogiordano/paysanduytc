@@ -134,6 +134,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/printer.png"))); // NOI18N
         jButton3.setText("IMPRIMIR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,17 +147,17 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jButton3)
-                .addGap(50, 50, 50)
-                .addComponent(jButton2)
-                .addGap(60, 60, 60)
-                .addComponent(jButton1)
-                .addGap(115, 115, 115)
-                .addComponent(jButton4)
-                .addContainerGap(155, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton3)
+                        .addGap(117, 117, 117)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(134, 134, 134)
+                        .addComponent(jButton4))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

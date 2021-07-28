@@ -7,6 +7,7 @@ package GUI;
 
 import CLASES.funcionario;
 import CLASES.observacion;
+import static GUI.administrarfuncionarios.funcio;
 import PERSISTENCIA.CPrincipal;
 import java.awt.Font;
 
@@ -34,6 +35,7 @@ public class listobs extends javax.swing.JInternalFrame {
         initComponents();
         activo = true;
         cargartabla();
+        desactivarbotones();
     }
 
     public void cargartabla() {
@@ -70,6 +72,7 @@ public class listobs extends javax.swing.JInternalFrame {
         mdl1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         setTitle("Lista de Observaciones");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -91,8 +94,15 @@ public class listobs extends javax.swing.JInternalFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/editar.png"))); // NOI18N
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
+        mdl1.setBackground(new java.awt.Color(28, 28, 28));
         mdl1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         mdl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,6 +131,7 @@ public class listobs extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(mdl1);
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/delete.png"))); // NOI18N
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,23 +145,21 @@ public class listobs extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(27, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(55, 55, 55))))
+                        .addGap(432, 432, 432)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -163,8 +172,16 @@ public class listobs extends javax.swing.JInternalFrame {
         activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
-
+    public void desactivarbotones(){
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+    }
+       public void activarbotones(){
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+    }
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
+       activarbotones();
         observacion prod = (observacion) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
         if (evt.getClickCount() == 2) {
             label.setText("<html>Nombre Funcionario Observado: " + prod.getFuncionariobservado().getNombre() + "<br>"
@@ -182,8 +199,27 @@ public class listobs extends javax.swing.JInternalFrame {
         CPrincipal.getInstance().delete(observacion);
         CPrincipal.getInstance().refresh(funcio);
         cargartabla();
-         JOptionPane.showMessageDialog(null, "Observacion eliminada correctamente", "Obseravacion", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Observacion eliminada correctamente", "Obseravacion", JOptionPane.INFORMATION_MESSAGE);
+        desactivarbotones();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+         
+        if (observarfuncionario.activo == false) { 
+           observarfuncionario.funcio=funcio; 
+           observarfuncionario.estadomodificiar=true; 
+           observarfuncionario.obstoedit= (observacion) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
+            observarfuncionario AU = new observarfuncionario(); 
+           
+           
+            
+            main.jDesktopPane1.add(AU);
+            AU.setVisible(true);
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

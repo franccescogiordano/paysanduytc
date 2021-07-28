@@ -50,9 +50,11 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         setTitle("LOGROS FUNCIONARIO");
 
+        jPanel1.setBackground(new java.awt.Color(28, 28, 28));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cargar nuevo logro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -102,6 +104,7 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
                 .addGap(14, 14, 14))
         );
 
+        jTable1.setBackground(new java.awt.Color(28, 28, 28));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

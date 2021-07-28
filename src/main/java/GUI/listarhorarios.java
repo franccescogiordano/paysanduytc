@@ -40,6 +40,7 @@ public class listarhorarios extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         mdl1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -59,6 +60,7 @@ public class listarhorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        mdl1.setBackground(new java.awt.Color(28, 28, 28));
         mdl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

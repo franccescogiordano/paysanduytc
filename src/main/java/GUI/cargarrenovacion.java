@@ -58,6 +58,7 @@ public class cargarrenovacion extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {

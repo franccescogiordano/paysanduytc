@@ -60,6 +60,7 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
         jLabelPropietario = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -174,19 +175,17 @@ public class renovarcarnet extends javax.swing.JInternalFrame {
         Date date = new Date();
         carnefuncionario.setFechaRenovacion(date);
         carnefuncionario.setFechavencimiento(jDateChooser.getDate());
+        carnefuncionario.setEstado("Vigente");
         CPrincipal.getInstance().merge(carnefuncionario);
         main.funcionarios = ctrlfuncionario.cargarfuncionarios();
 
         ctrlavisos.avisarcarnevencido(main.funcionarios);
-
-        //       funcionariosvencidos.invalidate();
-        //    funcionariosvencidos.validate();
         if (funcionariosvencidos.activo == true) {
             funcionariosvencidos.cargartablaporvencer();
             funcionariosvencidos.cargartablavencidos();
         }
         JOptionPane.showMessageDialog(null, "Carnet Renovado con Exito!", null, JOptionPane.INFORMATION_MESSAGE);
-
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

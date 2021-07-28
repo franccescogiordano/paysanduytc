@@ -55,6 +55,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
         jTablehorariosfuncio = new javax.swing.JTable();
         jLabel3Funcionario = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -96,6 +97,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("HORARIOS DEL FUNCIONARIO");
 
+        md1.setBackground(new java.awt.Color(28, 28, 28));
         md1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         md1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,6 +125,7 @@ public class asignarhorarios extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(md1);
 
+        jTablehorariosfuncio.setBackground(new java.awt.Color(28, 28, 28));
         jTablehorariosfuncio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTablehorariosfuncio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

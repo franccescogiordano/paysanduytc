@@ -7,6 +7,7 @@ package GUI;
 
 import CLASES.carnets;
 import CLASES.funcionario;
+import CONTROLADORES.CambiarColorCeldas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -21,12 +22,14 @@ public class listarcarnets extends javax.swing.JInternalFrame {
     /**
      * Creates new form listarcarnets
      */
+    CambiarColorCeldas colorcelda = new CambiarColorCeldas();
     public static boolean activo = false;
 
     public listarcarnets() {
         activo = true;
         initComponents();
         cargartabla();
+        jTable1.setDefaultRenderer(jTable1.getColumnClass(3), colorcelda); 
     }
 
     /**
@@ -41,6 +44,7 @@ public class listarcarnets extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -60,20 +64,21 @@ public class listarcarnets extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(28, 28, 28));
         jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Funcionario", "Carnet", "Vencimiento"
+                "Funcionario", "Carnet", "Vencimiento", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -118,10 +123,11 @@ public class listarcarnets extends javax.swing.JInternalFrame {
                 itx = next.getCarnetsdelfuncionario().iterator();
                 while (itx.hasNext()) {
                     carnets next1 = itx.next();
-                    Object[] fila = new Object[3];
+                    Object[] fila = new Object[4];
                     fila[0] = next;
                     fila[1] = next1.getTipocarnet();
                     fila[2] = cambiarformatofecha(next1.getFechavencimiento());
+                    fila[3] = next1.getEstado();
                     md1.addRow(fila);
                 }
             }

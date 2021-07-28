@@ -28,6 +28,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
     public funcionariosvencidos() {
         initComponents();
         activo=true;
+        desactivarbotones();
     }
 
     /**
@@ -48,6 +49,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(28, 28, 28));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -72,6 +74,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setText("VENCIDOS!");
 
+        mdl1.setBackground(new java.awt.Color(28, 28, 28));
         mdl1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         mdl1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +106,7 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
             mdl1.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        mdl2.setBackground(new java.awt.Color(28, 28, 28));
         mdl2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         mdl2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,7 +138,9 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
             mdl2.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        jButton1.setBackground(new java.awt.Color(102, 255, 102));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Renovar Carnet Selecionado");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +148,10 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(153, 255, 204));
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/actualizar-pagina.png"))); // NOI18N
         jButton2.setText("Actualizar Datos");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,32 +204,23 @@ public class funcionariosvencidos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void desactivarbotones(){
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+    }
+       public void activarbotones(){
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+    }
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
-//        vaciarcampos();
+
 carnet = (carnets) mdl1.getValueAt(mdl1.getSelectedRow(), 0);
-//
-
-//
-//        // TODO add your handling code here:
-//
-//        cantidaddecarnets=0;
-//        if(funcio !=null){
-//            cantidaddecarnets=funcio.getCarnetsdelfuncionario().size();
-//
-//            for (int i = 0; i < cantidaddecarnets; i++) {
-//                if(funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Carne Brebet")){
-//                    jDateChooserBrebet.setDate(funcio.getCarnetsdelfuncionario().get(i).getFechavencimiento());
-//                }else{
-//                    jDateChooserCarnet.setDate(funcio.getCarnetsdelfuncionario().get(i).getFechavencimiento());
-//                }
-//            }
-//        }
-
+activarbotones();
     }//GEN-LAST:event_mdl1MouseClicked
 
     private void mdl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl2MouseClicked
 carnet = (carnets) mdl2.getValueAt(mdl2.getSelectedRow(), 0);
+activarbotones();
         // TODO add your handling code here:
     }//GEN-LAST:event_mdl2MouseClicked
 
