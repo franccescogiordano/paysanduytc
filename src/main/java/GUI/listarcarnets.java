@@ -8,9 +8,12 @@ package GUI;
 import CLASES.carnets;
 import CLASES.funcionario;
 import CONTROLADORES.CambiarColorCeldas;
+import CONTROLADORES.controladorfuncionario;
+import static GUI.administrarfuncionarios.mdl1;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,14 +25,19 @@ public class listarcarnets extends javax.swing.JInternalFrame {
     /**
      * Creates new form listarcarnets
      */
+    controladorfuncionario ctrlfuncionario = new controladorfuncionario();
+    public static List<carnets> carnetss;
     CambiarColorCeldas colorcelda = new CambiarColorCeldas();
     public static boolean activo = false;
 
     public listarcarnets() {
+        carnetss = ctrlfuncionario.cargarcarnets();
         activo = true;
         initComponents();
+
         cargartabla();
-        jTable1.setDefaultRenderer(jTable1.getColumnClass(3), colorcelda); 
+        jTable1.setDefaultRenderer(jTable1.getColumnClass(3), colorcelda);
+
     }
 
     /**
@@ -61,6 +69,11 @@ public class listarcarnets extends javax.swing.JInternalFrame {
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
             }
         });
 
@@ -111,27 +124,34 @@ public class listarcarnets extends javax.swing.JInternalFrame {
         activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        jTable1.clearSelection();
+    }//GEN-LAST:event_formMouseClicked
     public void cargartabla() {
         Iterator<carnets> itx;
         DefaultTableModel md1 = (DefaultTableModel) jTable1.getModel();
         md1.setRowCount(0);
         Iterator<funcionario> it = main.funcionarios.iterator();
-        while (it.hasNext()) {
+        /*    while (it.hasNext()) {
             funcionario next = it.next();
             if (next.isEliminado() != true) {
+         */
+        itx = carnetss.iterator();
+        while (itx.hasNext()) {
 
-                itx = next.getCarnetsdelfuncionario().iterator();
-                while (itx.hasNext()) {
-                    carnets next1 = itx.next();
-                    Object[] fila = new Object[4];
-                    fila[0] = next;
-                    fila[1] = next1.getTipocarnet();
-                    fila[2] = cambiarformatofecha(next1.getFechavencimiento());
-                    fila[3] = next1.getEstado();
-                    md1.addRow(fila);
-                }
+            carnets next1 = itx.next();
+            if (next1.getFuncionariodueniodelcarne().isEliminado() != true) {
+                Object[] fila = new Object[4];
+                fila[0] = next1.getFuncionariodueniodelcarne();
+                fila[1] = next1.getTipocarnet();
+                fila[2] = cambiarformatofecha(next1.getFechavencimiento());
+                fila[3] = next1.getEstado();
+                md1.addRow(fila);
             }
         }
+        //}
+        //  }
     }
 
     public String cambiarformatofecha(Date date) {

@@ -22,7 +22,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class funcionario implements Serializable {
     private boolean eliminado = false;
+    private int days4year;
 
+    public int getDays4year() {
+        return days4year;
+    }
+
+    public void setDays4year(int days4year) {
+        this.days4year = days4year;
+    }
     public boolean isEliminado() {
         return eliminado;
     }

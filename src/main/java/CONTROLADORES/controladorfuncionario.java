@@ -6,6 +6,7 @@
 package CONTROLADORES;
 
 import CLASES.cargo;
+import CLASES.carnets;
 import CLASES.funcionario;
 import CLASES.horarios;
 import GUI.addfuncionario;
@@ -73,6 +74,20 @@ public class controladorfuncionario {
         return lista;
     
 }
+    public List<carnets> cargarcarnets(){
+     
+        List<carnets> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM carnets ORDER BY DATE(fechavencimiento) ASC", carnets.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return lista;
+    
+}
+  
   public List<horarios> CargarHorarios(){
      
         List<horarios> lista = null;
