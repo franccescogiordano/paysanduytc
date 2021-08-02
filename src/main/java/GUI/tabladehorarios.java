@@ -11,11 +11,25 @@ import CONTROLADORES.controladorfuncionario;
 import CONTROLADORES.ctrl_controladoravisos;
 import CONTROLADORES.excel;
 import PERSISTENCIA.CPrincipal;
+import java.awt.Desktop;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -24,6 +38,11 @@ import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -38,8 +57,9 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     excel ex = new excel();
     public static List<horarios> horariosfuncio = new ArrayList<horarios>();
     public static boolean activo = false;
-    controladorfuncionario CF =  new controladorfuncionario();
+    controladorfuncionario CF = new controladorfuncionario();
     ctrl_controladoravisos CA = new ctrl_controladoravisos();
+
     public tabladehorarios() {
         activo = true;
         initComponents();
@@ -64,6 +84,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(28, 28, 28));
         setClosable(true);
@@ -117,6 +138,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/excel.png"))); // NOI18N
         jButton2.setText("Cargar tabla con excel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +167,14 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton5.setText("Guardar En Excel");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,9 +184,11 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton3)
-                        .addGap(124, 124, 124)
+                        .addGap(76, 76, 76)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(134, 134, 134)
                         .addComponent(jButton4))
@@ -173,7 +205,8 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -183,9 +216,8 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String datosuwu;
 
-       
         for (int i = 0; i < TablaDatos.getRowCount(); i++) {
-             horariosfuncio.clear();
+            horariosfuncio.clear();
             funcio = controladorfuncionario.findfuncionario((String) TablaDatos.getValueAt(i, 0));
             if (funcio != null) {
                 datosuwu = (String) TablaDatos.getValueAt(i, 1);
@@ -230,7 +262,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                 System.out.println(funcio);
                 CPrincipal.getInstance().merge(funcio);
             } else {
-               //no existe el funcionario
+                //no existe el funcionario
             }
             CA.carteldeok();
         }
@@ -286,32 +318,124 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo = true;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void TablaDatosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaDatosKeyPressed
-      
+
         // TODO add your handling code here:
     }//GEN-LAST:event_TablaDatosKeyPressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel)TablaDatos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TablaDatos.getModel();
         modelo.addRow(new Object[1]);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       MessageFormat header = new MessageFormat("Report Print");
-       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+        MessageFormat header = new MessageFormat("HORARIOS SEMANALES");
+        MessageFormat footer = new MessageFormat("Pagina{0,number,integer}");
         try {
-            TablaDatos.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            PrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
+            set.add(OrientationRequested.LANDSCAPE);
+            TablaDatos.print(JTable.PrintMode.FIT_WIDTH, header, footer, false, set, false);
         } catch (java.awt.print.PrinterException e) {
-            System.err.format("No se puede imprimir %s%n",e.getMessage());
+            System.err.format("No se puede imprimir %s%n", e.getMessage());
         }
+        //  printJavaComponent();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            exportarExcel(TablaDatos);
+            // TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(tabladehorarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+    public void exportarExcel(JTable t) throws IOException {
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de excel", "xls");
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Guardar archivo");
+        chooser.setAcceptAllFileFilterUsed(false);
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String ruta = chooser.getSelectedFile().toString().concat(".xls");
+            try {
+                File archivoXLS = new File(ruta);
+                if (archivoXLS.exists()) {
+                    archivoXLS.delete();
+                }
+                archivoXLS.createNewFile();
+                Workbook libro = new HSSFWorkbook();
+                FileOutputStream archivo = new FileOutputStream(archivoXLS);
+                Sheet hoja = libro.createSheet("Mi hoja de trabajo 1");
+                hoja.setDisplayGridlines(false);
+                for (int f = 0; f < t.getRowCount(); f++) {
+                    Row fila = hoja.createRow(f);
+                    for (int c = 0; c < t.getColumnCount(); c++) {
+                        Cell celda = fila.createCell(c);
+                        if (f == 0) {
+                            celda.setCellValue(t.getColumnName(c));
+                        }
+                    }
+                }
+                int filaInicio = 1;
+                for (int f = 0; f < t.getRowCount(); f++) {
+                    Row fila = hoja.createRow(filaInicio);
+                    filaInicio++;
+                    for (int c = 0; c < t.getColumnCount(); c++) {
+                        Cell celda = fila.createCell(c);
+                        if (t.getValueAt(f, c) instanceof Double) {
+                            celda.setCellValue(Double.parseDouble(t.getValueAt(f, c).toString()));
+                        } else if (t.getValueAt(f, c) instanceof Float) {
+                            celda.setCellValue(Float.parseFloat((String) t.getValueAt(f, c)));
+                        } else {
+                            celda.setCellValue(String.valueOf(t.getValueAt(f, c)));
+                        }
+                    }
+                }
+                libro.write(archivo);
+                archivo.close();
+                Desktop.getDesktop().open(archivoXLS);
+            } catch (IOException | NumberFormatException e) {
+                throw e;
+            }
+        }
+    }
+
+    public void printJavaComponent() {
+        PrinterJob job = PrinterJob.getPrinterJob();
+        job.setJobName("Print Java Component");
+
+        job.setPrintable(new Printable() {
+            public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
+                if (pageIndex > 0) {
+                    return (NO_SUCH_PAGE);
+                } else {
+                    Graphics2D g2d = (Graphics2D) g;
+                    g2d.translate(pageFormat.getImageableY(), pageFormat.getImageableX());
+
+                    TablaDatos.paint(g2d);
+
+                    return (PAGE_EXISTS);
+                }
+            }
+        });
+
+        if (job.printDialog()) {
+            try {
+                PrintRequestAttributeSet set = new HashPrintRequestAttributeSet();
+                set.add(OrientationRequested.LANDSCAPE);
+                job.print(set);
+            } catch (PrinterException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTable TablaDatos;
@@ -319,6 +443,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
