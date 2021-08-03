@@ -8,6 +8,7 @@ package CONTROLADORES;
 import CLASES.carnets;
 import CLASES.funcionario;
 import GUI.addcargo;
+import static GUI.administrarfuncionarios.getCalendar;
 import GUI.funcionariosvencidos;
 import GUI.main;
 import static GUI.main.jDesktopPane1;
@@ -17,6 +18,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -107,4 +111,71 @@ public class ctrl_controladoravisos {
         label.setFont(new Font("Arial", Font.BOLD, 18));
         JOptionPane.showMessageDialog(null, label, null, JOptionPane.OK_OPTION, icono);
     }
+
+    public void carteldeok2(String mensaje) {
+        JLabel label = new JLabel();
+        label.setText(mensaje);
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+        JOptionPane.showMessageDialog(null, label, null, JOptionPane.OK_OPTION, icono);
+    }
+
+    public int calcularantiguedad(Date first, Date last) {
+        Calendar a = getCalendar(first);
+        Calendar b = getCalendar(last);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH)
+                || (a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
+            diff--;
+        }
+        return diff;
+    }
+
+    public void calcularycargardiasfunc() {
+        Iterator<funcionario> it = main.funcionarios.iterator();
+        while (it.hasNext()) {
+            funcionario next = it.next();
+            if (next.getUltimafechadecomprobacion() == null) {
+                int diasactuales = next.getDays4year();
+                int twenty = 20;
+                int antiguedad = calcularantiguedad(next.getFechaIngreso(), new Date());
+                if (antiguedad >= 5) {
+                    twenty++;
+                    if (antiguedad == 5) {
+                        //nada bye
+                    } else {
+                        antiguedad--;
+                        twenty = twenty + (antiguedad / 4);
+                    }
+                    next.setDays4year(diasactuales + twenty);
+                }else if( antiguedad<5){
+                     next.setDays4year(diasactuales + twenty);
+                }
+
+            } else {
+                if ((calcularantiguedad(next.getUltimafechadecomprobacion(), new Date())) == 1) {
+                    int diasactuales = next.getDays4year();
+                    int twenty = 20;
+                    int antiguedad = calcularantiguedad(next.getFechaIngreso(), new Date());
+                    if (antiguedad >= 5) {
+                        twenty++;
+                        if (antiguedad == 5) {
+                            //nada bye
+                        } else {
+                            antiguedad--;
+                            twenty = twenty + (antiguedad / 4);
+                        }
+                        next.setDays4year(diasactuales + twenty);
+                    }  else if( antiguedad<5){
+                     next.setDays4year(diasactuales + twenty);
+                }
+
+                }
+            }
+
+            next.setUltimafechadecomprobacion(new Date());
+
+        }
+
+    }
+
 }

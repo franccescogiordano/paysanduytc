@@ -9,10 +9,13 @@ import CLASES.cargo;
 import CLASES.carnets;
 import CLASES.funcionario;
 import CLASES.horarios;
+import CLASES.licencia;
 import GUI.addfuncionario;
 import GUI.cargarrenovacion;
 import  GUI.main;
 import PERSISTENCIA.CPrincipal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -80,6 +83,23 @@ public class controladorfuncionario {
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM carnets ORDER BY DATE(fechavencimiento) ASC", carnets.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        return lista;
+    
+}
+        public String cambiarformatofecha(Date date) {
+        SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
+        return ParaSaberLaHoraInicio.format(date);
+    }
+    public List<licencia> cargarlicencias(){
+     
+        List<licencia> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM licencia ORDER BY DATE(Hasta) ASC", licencia.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();

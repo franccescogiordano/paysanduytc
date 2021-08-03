@@ -23,9 +23,17 @@ import javax.persistence.OneToMany;
 public class funcionario implements Serializable {
     private boolean eliminado = false;
     private int days4year;
+    private Date ultimafechadecomprobacion;
 
+    public Date getUltimafechadecomprobacion() {
+        return ultimafechadecomprobacion;
+    }
     public int getDays4year() {
         return days4year;
+    }
+
+    public void setUltimafechadecomprobacion(Date ultimafechadecomprobacion) {
+        this.ultimafechadecomprobacion = ultimafechadecomprobacion;
     }
 
     public void setDays4year(int days4year) {

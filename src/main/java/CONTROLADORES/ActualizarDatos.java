@@ -21,6 +21,7 @@ public class ActualizarDatos extends Thread{
                 //Aca iría el código de tu función o llamarla
                 ctrlavisos.avisarcarnevencido(funcionarios);
                 ctrlavisos.avisarcumpleaños(funcionarios);
+                ctrlavisos.calcularycargardiasfunc();
                 Thread.sleep(1000 * 60 * 60);
                 
                 
