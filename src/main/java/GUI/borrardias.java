@@ -9,6 +9,7 @@ import CLASES.funcionario;
 import CONTROLADORES.ctrl_controladoravisos;
 import PERSISTENCIA.CPrincipal;
 import java.util.Iterator;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,12 +21,20 @@ public class borrardias extends javax.swing.JInternalFrame {
     /**
      * Creates new form borrardias
      */
-      ctrl_controladoravisos CA = new ctrl_controladoravisos();
+    ctrl_controladoravisos CA = new ctrl_controladoravisos();
     public static funcionario funcio = null;
     public static boolean activo = false;
+    Integer value = 0;
+    Integer min = 0;
+    Integer max = 100;
+    Integer step = 1;
+    SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step);
+
     public borrardias() {
-        activo=true;
+        activo = true;
         initComponents();
+
+        jSpinner1.setModel(model);
         cargartabla();
         desactivarcarnets();
     }
@@ -158,17 +167,18 @@ public class borrardias extends javax.swing.JInternalFrame {
         activartodoslosbotones();
         funcio = (funcionario) tablita.getValueAt(tablita.getSelectedRow(), 0);
         jLabel2.setText(String.valueOf(funcio.getDays4year()));
-       
+
         // TODO add your handling code here:
     }//GEN-LAST:event_tablitaMouseClicked
     public void vaciarcampos() {
         jLabel2.setText("");
         jSpinner1.setValue(0);
         funcio = null;
+        jSpinner1.setModel(model);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- //(int) jSpinner1.getValue()
+        //(int) jSpinner1.getValue()
         funcio.setDays4year((int) jSpinner1.getValue());
         CPrincipal.getInstance().merge(funcio);
         CA.carteldeok2("Dias editados con exito!");
@@ -178,16 +188,17 @@ public class borrardias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        activo=false;
+        activo = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosing
- public void activartodoslosbotones() {
+    public void activartodoslosbotones() {
         jButton1.setEnabled(true);
     }
 
     public void desactivarcarnets() {
         jButton1.setEnabled(false);
     }
+
     public void cargartabla() {
         DefaultTableModel md1 = (DefaultTableModel) tablita.getModel();
         md1.setRowCount(0);

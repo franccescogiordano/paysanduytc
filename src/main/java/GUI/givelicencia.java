@@ -12,6 +12,8 @@ import CONTROLADORES.ctrl_controladoravisos;
 import PERSISTENCIA.CPrincipal;
 import java.util.Date;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import net.coderazzi.filters.gui.AutoChoices;
 import net.coderazzi.filters.gui.TableFilterHeader;
@@ -21,6 +23,11 @@ import net.coderazzi.filters.gui.TableFilterHeader;
  * @author franc
  */
 public class givelicencia extends javax.swing.JInternalFrame {
+    
+    Integer value = 0;
+    Integer min = 0;
+    Integer max = 100;
+    Integer step = 1;
 
     /**
      * Creates new form givelicencia
@@ -29,7 +36,7 @@ public class givelicencia extends javax.swing.JInternalFrame {
     public static funcionario funcio = null;
     public static boolean activo = false;
     TableFilterHeader filterHeader = null;
-
+    
     public givelicencia() {
         initComponents();
         activo = true;
@@ -237,7 +244,10 @@ public class givelicencia extends javax.swing.JInternalFrame {
         activartodoslosbotones();
         funcio = (funcionario) tablita.getValueAt(tablita.getSelectedRow(), 0);
         jLabel6.setText(funcio.getNombre() + " " + funcio.getApellido());
-        jLabel3.setText(funcio.getDays4year()+" dias");
+        jLabel3.setText(funcio.getDays4year() + " dias");
+        max = funcio.getDays4year();
+        SpinnerNumberModel model = new SpinnerNumberModel(value, min, max, step);
+        jSpinner1.setModel(model);
         // TODO add your handling code here:
     }//GEN-LAST:event_tablitaMouseClicked
     public void cargartabla() {
@@ -254,18 +264,32 @@ public class givelicencia extends javax.swing.JInternalFrame {
         }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if((int)jSpinner1.getValue()>0){
+        Date desde=jDateChooser1.getDate();
+        Date hasta=jDateChooser2.getDate();
+        if(desde!=null && hasta!=null){
+        if(desde.before(hasta)){
         licencia lic = new licencia();
         lic.setDiasTomados((int) jSpinner1.getValue());
         lic.setFechaDeSolicitud(new Date());
         lic.setDesde(jDateChooser1.getDate());
         lic.setHasta(jDateChooser2.getDate());
         lic.setLicenciadefuncionario(funcio);
-
+        
         funcio.setDays4year(funcio.getDays4year() - (int) jSpinner1.getValue());
         CPrincipal.getInstance().persist(lic);
         CPrincipal.getInstance().merge(funcio);
         CA.carteldeok2("Licencia otorgada con exito!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Error: fecha incoherente", null, JOptionPane.ERROR_MESSAGE);
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Error: fecha invalida", null, JOptionPane.ERROR_MESSAGE);
+        }
         vaciarcampos();
+        }else{
+              JOptionPane.showMessageDialog(null, "Error: cantidad de dias invalida", null, JOptionPane.ERROR_MESSAGE);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -278,11 +302,11 @@ public class givelicencia extends javax.swing.JInternalFrame {
         jDateChooser2.setCalendar(null);
         funcio = null;
     }
-
+    
     public void activartodoslosbotones() {
         jButton1.setEnabled(true);
     }
-
+    
     public void desactivarcarnets() {
         jButton1.setEnabled(false);
     }

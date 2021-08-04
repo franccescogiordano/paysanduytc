@@ -195,6 +195,7 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem11);
 
+        jMenuItem12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem12.setText("EditarDiasRestantesFuncionarios");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +204,7 @@ public class main extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem12);
 
+        jMenuItem13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jMenuItem13.setText("Ver todas las licencias ");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

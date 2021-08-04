@@ -88,6 +88,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem12">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="EditarDiasRestantesFuncionarios"/>
               </Properties>
               <Events>
@@ -96,6 +99,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem13">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="14" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ver todas las licencias "/>
               </Properties>
               <Events>
