@@ -100,7 +100,7 @@ public class licencia implements Serializable {
 
     @Override
     public String toString() {
-        return "CLASES.licencia[ id=" + id + " ]";
+        return licenciadefuncionario.getNombre()+" "+ licenciadefuncionario.getApellido();
     }
     
 }

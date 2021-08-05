@@ -5,15 +5,19 @@
  */
 package GUI;
 
+import CLASES.carnets;
 import CLASES.funcionario;
+import CONTROLADORES.ctrl_controladoravisos;
 import PERSISTENCIA.CPrincipal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,15 +27,20 @@ import net.coderazzi.filters.gui.TableFilterHeader;
 
 public class administrarfuncionarios extends javax.swing.JInternalFrame {
 
+    ctrl_controladoravisos ctrlavisos = new ctrl_controladoravisos();
     public static funcionario funcio = null;
     public static boolean activo = false;
     int cantidaddecarnets = 0;
     JLabel label = new JLabel();
     TableFilterHeader filterHeader = null;
+    public static List<carnets> carnetsfuncio = new ArrayList<carnets>();
 
     public administrarfuncionarios() {
         initComponents();
         cargartabla();
+        /* jButton2RenovarLibreta.setVisible(false);
+        jButton2RenovarBrebet.setVisible(false);
+        jButton1RenovarCarnet.setVisible(false);*/
         activo = true;
         desactivartodoslosbotones();
         desactivarcarnets();
@@ -403,6 +412,14 @@ public void desactivarcarnets() {
         SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
         return ParaSaberLaHoraInicio.format(date);
     }
+
+    public void cargarlistacarnets() {
+        /*REPARTIDORES*/
+        carnetsfuncio.clear();
+        for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
+            carnetsfuncio.add(funcio.getCarnetsdelfuncionario().get(i));
+        }
+    }
     private void mdl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mdl1MouseClicked
         vaciarcampos();
         activartodoslosbotones();
@@ -444,28 +461,46 @@ public void desactivarcarnets() {
     }//GEN-LAST:event_mdl1MouseClicked
 
     private void jButton2RenovarBrebetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2RenovarBrebetActionPerformed
-        Date hoy = new Date();
-        for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
-            if (funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Carne Brebet")) {
-                funcio.getCarnetsdelfuncionario().get(i).setFechaRenovacion(hoy);
-                funcio.getCarnetsdelfuncionario().get(i).setFechavencimiento(jDateChooserBrebet.getDate());
-                JOptionPane.showMessageDialog(null, "Fecha de Vencimiento modificada correctamente", null, JOptionPane.OK_OPTION);
-            } else {
+        label.setText("<html>Esta seguro de modificar esta fecha?");
+        int resp = JOptionPane.showConfirmDialog(null, label, "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            Date hoy = new Date();
+            for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
+                if (funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Carne Brebet")) {
+                    carnets carne;
+                    carne = funcio.getCarnetsdelfuncionario().get(i);
+                    carne.setFechaRenovacion(hoy);
+                    carne.setFechavencimiento(jDateChooserBrebet.getDate());
+                    carne.setEstado("Vigente");
+                    CPrincipal.getInstance().merge(carne);
+                    JOptionPane.showMessageDialog(null, "Fecha de Vencimiento modificada correctamente", null, JOptionPane.OK_OPTION);
+                    ctrlavisos.avisarcarnevencido(main.funcionarios);
+                } else {
 
+                }
             }
         }
 
     }//GEN-LAST:event_jButton2RenovarBrebetActionPerformed
 
     private void jButton1RenovarCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1RenovarCarnetActionPerformed
-        Date hoy = new Date();
-        for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
-            if (funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Carne de salud")) {
-                funcio.getCarnetsdelfuncionario().get(i).setFechaRenovacion(hoy);
-                funcio.getCarnetsdelfuncionario().get(i).setFechavencimiento(jDateChooserCarnet.getDate());
-                JOptionPane.showMessageDialog(null, "Fecha de Vencimiento modificada correctamente", null, JOptionPane.OK_OPTION);
-            } else {
+        label.setText("<html>Esta seguro de modificar esta fecha?");
+        int resp = JOptionPane.showConfirmDialog(null, label, "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            Date hoy = new Date();
+            for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
+                if (funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Carne de salud")) {
+                    carnets carne;
+                    carne = funcio.getCarnetsdelfuncionario().get(i);
+                    carne.setFechaRenovacion(hoy);
+                    carne.setFechavencimiento(jDateChooserCarnet.getDate());
+                    carne.setEstado("Vigente");
+                    CPrincipal.getInstance().merge(carne);
+                    JOptionPane.showMessageDialog(null, "Fecha de Vencimiento modificada correctamente", null, JOptionPane.OK_OPTION);
+                    ctrlavisos.avisarcarnevencido(main.funcionarios);
+                } else {
 
+                }
             }
         }
     }//GEN-LAST:event_jButton1RenovarCarnetActionPerformed
@@ -567,6 +602,25 @@ public void desactivarcarnets() {
     }//GEN-LAST:event_jButton1DeleteActionPerformed
 
     private void jButton2RenovarLibretaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2RenovarLibretaActionPerformed
+        label.setText("<html>Esta seguro de modificar esta fecha?");
+        int resp = JOptionPane.showConfirmDialog(null, label, "Alerta!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            Date hoy = new Date();
+            for (int i = 0; i < funcio.getCarnetsdelfuncionario().size(); i++) {
+                if (funcio.getCarnetsdelfuncionario().get(i).getTipocarnet().equals("Libreta Conducir")) {
+                    carnets carne;
+                    carne = funcio.getCarnetsdelfuncionario().get(i);
+                    carne.setFechaRenovacion(hoy);
+                    carne.setFechavencimiento(jDateChooserLibreta.getDate());
+                    carne.setEstado("Vigente");
+                    CPrincipal.getInstance().merge(carne);
+                    JOptionPane.showMessageDialog(null, "Fecha de Vencimiento modificada correctamente", null, JOptionPane.OK_OPTION);
+                    ctrlavisos.avisarcarnevencido(main.funcionarios);
+                } else {
+
+                }
+            }
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2RenovarLibretaActionPerformed
     public void cargartabla() {
@@ -621,11 +675,11 @@ public void desactivarcarnets() {
 
             for (int i = 0; i < cantidadcarne; i++) {
                 carnets += "-" + funcio.getCarnetsdelfuncionario().get(i).getTipocarnet() + " Fecha vencimiento: \n";
-                carnets += funcio.getCarnetsdelfuncionario().get(i).getFechavencimiento() + "\n";
+                carnets += cambiarformatofecha(funcio.getCarnetsdelfuncionario().get(i).getFechavencimiento()) + "\n";
                 if (funcio.getCarnetsdelfuncionario().get(i).getFechaRenovacion() == null) {
 
                 } else {
-                    carnets += "Fecha de ultima renovacion:" + funcio.getCarnetsdelfuncionario().get(i).getFechaRenovacion() + "\n";
+                    carnets += "Fecha de ultima renovacion:" + cambiarformatofecha(funcio.getCarnetsdelfuncionario().get(i).getFechaRenovacion()) + "\n";
                 }
 
             }

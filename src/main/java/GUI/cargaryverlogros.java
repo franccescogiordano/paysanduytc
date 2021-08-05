@@ -8,6 +8,7 @@ package GUI;
 import CLASES.funcionario;
 import CLASES.logros;
 import CLASES.obtienelogro;
+import CONTROLADORES.ctrl_controladoravisos;
 import PERSISTENCIA.CPrincipal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
      */
     public static boolean activo = false;
     public static funcionario funcio3;
+    ctrl_controladoravisos CA = new ctrl_controladoravisos();
 
     public cargaryverlogros() {
         initComponents();
@@ -105,6 +107,7 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
         );
 
         jTable1.setBackground(new java.awt.Color(28, 28, 28));
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -145,20 +148,27 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Date fecha= new Date();
+        Date fecha = new Date();
         if (!jTextArea1.getText().isEmpty()) {
-            if(jDateChooser2.getDate()!=null){
-            fecha=jDateChooser2.getDate();
+            if (jDateChooser2.getDate() != null) {
+                fecha = jDateChooser2.getDate();
+                logros logrologrado = new logros();
+                logrologrado.setLogro(jTextArea1.getText());
+                obtienelogro nuevocargo = new obtienelogro();
+                nuevocargo.setFechaObtencionLogro(fecha);
+                nuevocargo.setLogrologrado(logrologrado);
+                nuevocargo.setFuncionariopremiado(funcio3);
+                CPrincipal.getInstance().persist(logrologrado);
+                CPrincipal.getInstance().persist(nuevocargo);
+                CPrincipal.getInstance().refresh(funcio3);
+                cargartabla();
+            } else {
+                CA.cartelerror("Campo Fecha Vacio");
             }
-            logros logrologrado = new logros();
-            logrologrado.setLogro(jTextArea1.getText());
-            obtienelogro nuevocargo = new obtienelogro();
-            nuevocargo.setFechaObtencionLogro(fecha);
-            nuevocargo.setLogrologrado(logrologrado);
-            nuevocargo.setFuncionariopremiado(funcio3);
-            CPrincipal.getInstance().persist(logrologrado);
-            CPrincipal.getInstance().persist(nuevocargo);
-            CPrincipal.getInstance().refresh(funcio3);
+
+            CA.carteldeok2("Licencia otorgada con exito!");
+        } else {
+            CA.cartelerror("Campo de texto vacio");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -175,10 +185,16 @@ public class cargaryverlogros extends javax.swing.JInternalFrame {
 
         }
     }
-public String cambiarformatofecha(Date date){
-      SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
-      return  ParaSaberLaHoraInicio.format(date);
-}
+
+    public void vaciarcampos() {
+        jTextArea1.setText("");
+        jDateChooser2.setCalendar(null);
+    }
+
+    public String cambiarformatofecha(Date date) {
+        SimpleDateFormat ParaSaberLaHoraInicio = new SimpleDateFormat("dd-MM-yyyy");
+        return ParaSaberLaHoraInicio.format(date);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;

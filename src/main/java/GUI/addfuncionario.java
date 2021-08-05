@@ -554,6 +554,8 @@ public class addfuncionario extends javax.swing.JInternalFrame {
         jDateChooserFecha.setCalendar(null);
         jDateChooserCarnet.setCalendar(null);
         jDateChooserBrebet.setCalendar(null);
+        jComboBoxCargo.setSelectedIndex(0);
+        jDateChooserIngreso.setCalendar(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

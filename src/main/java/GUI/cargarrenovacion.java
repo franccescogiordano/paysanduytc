@@ -140,6 +140,7 @@ public class cargarrenovacion extends javax.swing.JInternalFrame {
         CPrincipal.getInstance().persist(nuevocargo);
         CPrincipal.getInstance().refresh(funcio3);
         JOptionPane.showMessageDialog(null, "Cargo actualizado correctamente", null, JOptionPane.OK_OPTION);
+        activo = false;
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -40,6 +40,9 @@ public class ctrl_controladoravisos {
 
     public Icon icono = new ImageIcon(getClass().getResource("/META-INF/check.png"));
 
+    public void cartelerror(String mensaje){
+          JOptionPane.showMessageDialog(null, "Error: "+mensaje, null, JOptionPane.ERROR_MESSAGE);
+    }
     public void avisarcarnevencido(List<funcionario> funciolist) {
         main.funcionariosconcarnetporvencer.clear();
         main.funcionariosconcarnetvencido.clear();
