@@ -351,6 +351,15 @@ public class addfuncionario extends javax.swing.JInternalFrame {
             msg.setText(msg.getText() + "Falta compleatar campo nombre <br>");
             jTextFieldNombre.setBackground(Color.red);
         }
+        if (dateingreso==null) {
+
+            msg.setText(msg.getText() + "Falta compleatar campo Fecha Ingreso <br>");
+        }
+        if (fn==null) {
+
+            msg.setText(msg.getText() + "Falta compleatar campo Fecha nacimiento <br>");
+       
+        }
         if (apellido.isBlank()) {
             msg.setText(msg.getText() + "Falta compleatar campo apellido <br>");
             jTextFieldApeliido.setBackground(Color.red);
