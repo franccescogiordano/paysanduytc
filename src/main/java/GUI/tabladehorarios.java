@@ -259,7 +259,7 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
                     crearhorario(datosuwu, (String) TablaDatos.getValueAt(i, 14), "Domingo");
                 }
                 funcio.setHorariosdelfuncionario(horariosfuncio);
-                System.out.println(funcio);
+             
                 CPrincipal.getInstance().merge(funcio);
             } else {
                 //no existe el funcionario
@@ -291,8 +291,11 @@ public class tabladehorarios extends javax.swing.JInternalFrame {
             horarios horariolunes = new horarios();
             horariolunes.setDia(dia);
             horariolunes.setOcupacion(ocup);
-            horariolunes.setHoracomienzo(datos[0]);
-            horariolunes.setHorafin(datos[1]);
+            String temp;
+            temp=datos[0].replaceAll("\\s+","");
+            horariolunes.setHoracomienzo(temp);
+            temp=datos[1].replaceAll("\\s+","");
+            horariolunes.setHorafin(temp);
             horariosfuncio.add(horariolunes);
             main.Horarios.add(horariolunes);
             horariolunes.setFuncionarioasignado(funcio);

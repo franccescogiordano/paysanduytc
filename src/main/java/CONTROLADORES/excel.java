@@ -8,6 +8,7 @@ package CONTROLADORES;
 import CLASES.funcionario;
 import CLASES.horarios;
 import GUI.controlarllegastarde;
+import GUI.controlartefuisteantes;
 import GUI.main;
 import GUI.tabladehorarios;
 import java.io.File;
@@ -63,8 +64,10 @@ public class excel {
                     celda = hoja.getRow(i).getCell(3);
                     String fecha = celda.getStringCellValue();
                     // System.out.println(" " + nombre + " " + fecha);
-                    funcionario funcio;
+                    funcionario funcio=null;
                     funcio = controladorfuncionario.findfuncionario(nombre);
+                    
+                    if(funcio!=null){
                     Calendar calendar = Calendar.getInstance();
 
                     SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -129,7 +132,7 @@ public class excel {
                             long Difenminutos2;
                             if (stringtemporal3.equals(stringtempora2)) {
                                 Difenminutos2 = diferencia / (60 * 1000);
-                                if (Difenminutos2 > 0) {
+                                   if (Difenminutos2 > 0) {
                                     Object[] fila = new Object[3];
                                     fila[0] = nombre;
                                     fila[1] = cambiarformatofecha(x);
@@ -140,6 +143,7 @@ public class excel {
                             }
                         }
                     }
+                }
                 }
             } else {
                 HSSFCell celdax;
@@ -164,7 +168,7 @@ public class excel {
 
     }
     public String procesarsalidasantes(File archivo) {
-        DefaultTableModel md2 = (DefaultTableModel) controlarllegastarde.jTable1.getModel();
+        DefaultTableModel md2 = (DefaultTableModel) controlartefuisteantes.jTable1.getModel();
         md2.setRowCount(0);
         try {
 
@@ -187,7 +191,9 @@ public class excel {
                     String fecha = celda.getStringCellValue();
                     // System.out.println(" " + nombre + " " + fecha);
                     funcionario funcio;
+                    
                     funcio = controladorfuncionario.findfuncionario(nombre);
+                    if(funcio!=null){
                     Calendar calendar = Calendar.getInstance();
 
                     SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -265,6 +271,7 @@ public class excel {
                             }
                         }
                     }
+                }
                 }
             } else {
                 HSSFCell celdax;
